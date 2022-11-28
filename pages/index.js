@@ -19,13 +19,25 @@ export default function Home() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <main className="">
-          <h1 className="">
-            Welcome to <a href="https://nextjs.org">Next.js!</a>
-          </h1>
+        <main className="container">
+          <h1 className="">Marble Solitaire</h1>
 
           <div className="gameContainer">
             <MarbleSolitaire />
+          </div>
+          <div className="instructions">
+            <h1>Instructions </h1>
+            <p>
+              Marble solitaire is played on a board with a grid of 33 holes. At
+              the start of the game there are marbles in every hole except for
+              the central hole. Marbles can jump vertically or horizontally over
+              a neighbouring marble and into an empty hole on the other side.
+              The marble that was jumped over is then removed: You can select a
+              marble by clicking or tapping it, or by using the tab key. You can
+              then jump by clicking or tapping an empty hole, or by using the
+              arrow keys. The aim of the game is to remove all of the marbles
+              except for one.
+            </p>
           </div>
         </main>
 
@@ -40,8 +52,23 @@ export default function Home() {
         </footer>
       </div>
       <style jsx>{`
+        .page {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          max-width: 1000px;
+        }
         .gameContainer {
           display: flex;
+        }
+        .instructions {
+          margin-top: 2rem;
+          text-align: center;
         }
       `}</style>
     </>
@@ -229,7 +256,7 @@ function Cell({ char, x, y, active, ...rest }) {
         }
 
         .marble.active {
-          border: 3gipx solid black;
+          border: 3px solid black;
         }
         :not(.wall) > .empty {
           position: absolute;
