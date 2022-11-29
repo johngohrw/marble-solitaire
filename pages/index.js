@@ -33,6 +33,7 @@ export default function Home() {
               the start of the game there are marbles in every hole except for
               the central hole.
             </p>
+            <img src="./demo.png" />
             <p>
               Marbles can jump vertically or horizontally over a neighbouring
               marble and into an empty hole on the other side. The marble that
