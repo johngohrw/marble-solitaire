@@ -1,5 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { levels } from "../components/levels";
 import MarbleGame from "../components/MarbleGame";
 
 String.prototype.replaceAt = function (index, replacement) {
@@ -11,6 +13,18 @@ String.prototype.replaceAt = function (index, replacement) {
 };
 
 export default function Home() {
+  const [level, setLevel] = useState(null);
+
+  useEffect(() => {
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    });
+    const { level } = params;
+    if (Object.prototype.hasOwnProperty.call(levels, level)) {
+      setLevel(level);
+    }
+  }, []);
+
   return (
     <>
       <div className="page">
@@ -24,7 +38,7 @@ export default function Home() {
           <h1 className="title">Marble Solitaire</h1>
 
           <div className="gameContainer">
-            <MarbleGame />
+            <MarbleGame level={level || "classic"} />
           </div>
           <div className="instructions">
             <h2>Instructions</h2>

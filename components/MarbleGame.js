@@ -4,16 +4,26 @@ import { useEffect, useState } from "react";
 import { levels } from "./levels";
 import { average, getValidMoves, winCheck } from "./utils";
 
-export default function MarbleGame() {
-  const [restartState, setRestartState] = useState(levels.classic);
-  const [state, setState] = useState(levels.classic);
-  const [validMoves, setValidMoves] = useState(getValidMoves(levels.classic));
+export default function MarbleGame({ level }) {
+  const [restartState, setRestartState] = useState(
+    levels[level] || levels.classic
+  );
+  const [state, setState] = useState(levels[level] || levels.classic);
+  const [validMoves, setValidMoves] = useState(
+    getValidMoves(levels[level] || levels.classic)
+  );
   const [hist, setHist] = useState([]);
   const [overlayMessage, setOverlayMessage] = useState("message");
   const [showOverlay, setShowOverlay] = useState(false);
 
   const [playClick] = useSound("./click-perc.wav", { volume: 0.25 });
   const [playTada] = useSound("./tada.mp3", { volume: 0.25 });
+
+  // restart if level changes
+  useEffect(() => {
+    setRestartState(levels[level]);
+    setState(levels[level]);
+  }, [level]);
 
   useEffect(() => {
     setValidMoves(getValidMoves(state));
