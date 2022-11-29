@@ -1,9 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Marcellus&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Marcellus&family=Noto+Sans&display=swap");
 body {
   background: rgb(203, 204, 176);
   margin: 0;
-
-  font-family: "Marcellus", serif;
+  font-family: "Noto Sans", sans-serif;
 }
 
 * {
@@ -17,4 +16,5 @@ h4,
 h5,
 h6 {
   margin-top: 0;
+  font-family: "Marcellus", serif;
 }
