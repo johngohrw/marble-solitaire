@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import useSound from "use-sound";
 
 String.prototype.replaceAt = function (index, replacement) {
   return (
@@ -217,15 +218,27 @@ function average(n1, n2) {
 }
 
 function MarbleSolitaire() {
+  const [restartState, setRestartState] = useState(initialState.chars);
   const [state, setState] = useState(initialState.chars);
   const [validMoves, setValidMoves] = useState(
     getValidMoves(initialState.chars)
   );
   const [hist, setHist] = useState([]);
+  const [overlayMessage, setOverlayMessage] = useState("message");
+  const [showOverlay, setShowOverlay] = useState(false);
+
+  const [playClick] = useSound("./click-perc.wav", { volume: 0.25 });
 
   useEffect(() => {
     setValidMoves(getValidMoves(state));
   }, [state]);
+
+  useEffect(() => {
+    console.log(Object.keys(validMoves).length);
+    if (Object.keys(validMoves).length <= 0) {
+      endGame(false);
+    }
+  }, [validMoves]);
 
   useEffect(() => {
     if (hist.length > 1) {
@@ -253,11 +266,39 @@ function MarbleSolitaire() {
     newState[between[1]] = newState[between[1]].replaceAt(between[0], "_"); // inbetween becomes empty
     newState[to[1]] = newState[to[1]].replaceAt(to[0], "o"); // to becomes a marble
     setState(newState);
+    playClick();
+  }
+
+  function restartGame() {
+    setState(restartState);
+    setShowOverlay(false);
+  }
+
+  function endGame(win) {
+    if (win) {
+      setOverlayMessage(<div>lol</div>);
+    } else {
+      setOverlayMessage(
+        <>
+          <img
+            src="./yay.jpg"
+            style={{ height: "100px", width: "100px", marginBottom: "1rem" }}
+          />
+          <div style={{ marginBottom: "1rem" }}>No moves left</div>
+
+          <button className="button" onClick={restartGame}>
+            Try again
+          </button>
+        </>
+      );
+    }
+    setShowOverlay(true);
   }
 
   return (
     <>
       <div className="game">
+        {showOverlay && <div className="overlay">{overlayMessage}</div>}
         <div className="grid walls" style={{ userSelect: "none" }}>
           {state.map((row, y) => (
             <div className="gridRow" key={y}>
@@ -311,6 +352,19 @@ function MarbleSolitaire() {
         .game {
           position: relative;
         }
+        .overlay {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: rgba(52, 52, 53, 0.83);
+          z-index: 1;
+
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          color: white;
+        }
         .grid {
           display: flex;
           flex-direction: column;
@@ -321,9 +375,20 @@ function MarbleSolitaire() {
         .walls {
           position: absolute;
           top: 0;
+          left: 0;
           filter: url("#gooey");
         }
-        .grid.walls {
+        .grid:not(.walls) {
+        }
+      `}</style>
+      <style jsx global>{`
+        .button {
+          border: none;
+          background: purple;
+          color: white;
+          padding: 0.5rem 1rem;
+          border-radius: 24px;
+          cursor: pointer;
         }
       `}</style>
     </>
@@ -363,7 +428,7 @@ function Cell({ char, x, y, active, showOnlyWalls = false, ...rest }) {
           width: 80%;
           height: 80%;
           border-radius: 50%;
-          background: green;
+          background: #008073;
           cursor: pointer;
         }
 
