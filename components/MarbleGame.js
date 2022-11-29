@@ -133,7 +133,7 @@ export default function MarbleGame() {
           ))}
         </div>
       </div>
-      <svg>
+      <svg style={{ width: 0, height: 0 }}>
         <filter id="gooey">
           <feGaussianBlur in="SourceGraphic" stdDeviation="10" />
           <feColorMatrix
