@@ -4,6 +4,16 @@ import { useEffect, useState } from "react";
 import { levels } from "./levels";
 import { average, getValidMoves, winCheck } from "./utils";
 
+function getMaxRowLength(state) {
+  let result = 0;
+  state.forEach((row) => {
+    if (row.length > result) {
+      result = row.length;
+    }
+  });
+  return result;
+}
+
 export default function MarbleGame({ level }) {
   const [restartState, setRestartState] = useState(
     levels[level] || levels.classic
@@ -17,6 +27,7 @@ export default function MarbleGame({ level }) {
   const [showOverlay, setShowOverlay] = useState(false);
 
   const [playClick] = useSound("./click-perc.wav", { volume: 0.25 });
+  const [playLose] = useSound("./toddlercry.wav", { volume: 0.15 });
   const [playTada] = useSound("./tada.mp3", { volume: 0.25 });
 
   // restart if level changes
@@ -86,6 +97,7 @@ export default function MarbleGame({ level }) {
         </>
       );
     } else {
+      playLose();
       setOverlayMessage(
         <>
           <img
@@ -105,42 +117,74 @@ export default function MarbleGame({ level }) {
 
   return (
     <>
-      <div className="game">
-        {showOverlay && <div className="overlay">{overlayMessage}</div>}
-        <div className="grid walls" style={{ userSelect: "none" }}>
-          {state.map((row, y) => (
-            <div className="gridRow" key={y}>
-              {row.split("").map((char, x) => (
-                <Cell
-                  showOnlyWalls
-                  x={x}
-                  y={y}
-                  key={`${char}${x}${y}`}
-                  char={char}
-                />
-              ))}
-            </div>
-          ))}
+      <div className="gameContainer">
+        <div
+          className="overlay"
+          style={{
+            opacity: showOverlay ? 1 : 0,
+            userSelect: "none",
+            pointerEvents: showOverlay ? "auto" : "none",
+          }}
+        >
+          {overlayMessage}
         </div>
-        <div className="grid">
-          {state.map((row, y) => (
-            <div className="gridRow" key={y}>
-              {row.split("").map((char, x) => (
-                <Cell
-                  x={x}
-                  y={y}
-                  key={`${char}${x}${y}`}
-                  char={char}
-                  active={
-                    hist.length > 0 &&
-                    hist[hist.length - 1][0] === x &&
-                    hist[hist.length - 1][1] === y
-                  }
-                  onClick={() => setHist([...hist, [x, y]])}
-                />
-              ))}
-            </div>
-          ))}
+        <div className="game">
+          <div className="grid walls" style={{ userSelect: "none" }}>
+            {state.map((row, y) => (
+              <div className="gridRow" key={y}>
+                {row.split("").map((char, x) => (
+                  <Cell
+                    showOnlyWalls
+                    x={x}
+                    y={y}
+                    key={`${char}${x}${y}`}
+                    char={char}
+                  />
+                ))}
+
+                {/* fillers */}
+                {Array.from(
+                  { length: getMaxRowLength(state) - row.length },
+                  (v, i) => i
+                ).map((i) => (
+                  <Cell key={`filler${i}`} char="-" />
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="grid">
+            {state.map((row, y) => (
+              <div className="gridRow" key={y}>
+                {row.split("").map((char, x) => (
+                  <Cell
+                    x={x}
+                    y={y}
+                    key={`${char}${x}${y}`}
+                    char={char}
+                    active={
+                      hist.length > 0 &&
+                      hist[hist.length - 1][0] === x &&
+                      hist[hist.length - 1][1] === y
+                    }
+                    onClick={() => setHist([...hist, [x, y]])}
+                  />
+                ))}
+                {/* fillers */}
+                {Array.from(
+                  { length: getMaxRowLength(state) - row.length },
+                  (v, i) => i
+                ).map((i) => (
+                  <Cell key={`filler${i}`} char="-" />
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="gameOptions">
+            <div style={{ marginRight: "1rem" }}>Level: {level}</div>
+            <button className="button" onClick={restartGame}>
+              Restart
+            </button>{" "}
+          </div>
         </div>
       </div>
       <svg style={{ width: 0, height: 0 }}>
@@ -157,11 +201,21 @@ export default function MarbleGame({ level }) {
         </filter>
       </svg>
       <style jsx>{`
+        .gameContainer {
+          width: 100%;
+          position: relative;
+          padding: 1rem;
+        }
         .game {
           position: relative;
+          display: flex;
+          flex-direction: column;
+          width: 100%;
         }
         .overlay {
           position: absolute;
+          top: 0;
+          left: 0;
           width: 100%;
           height: 100%;
           background: rgba(52, 52, 53, 0.83);
@@ -176,6 +230,7 @@ export default function MarbleGame({ level }) {
         .grid {
           display: flex;
           flex-direction: column;
+          width: 100%;
         }
         .gridRow {
           display: flex;
@@ -188,15 +243,26 @@ export default function MarbleGame({ level }) {
         }
         .grid:not(.walls) {
         }
+
+        .gameOptions {
+          margin-top: 1rem;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+        }
       `}</style>
       <style jsx global>{`
         .button {
-          border: none;
-          background: purple;
+          border: 1px solid #4b817b;
+          background: #24504c;
           color: white;
           padding: 0.5rem 1rem;
           border-radius: 24px;
           cursor: pointer;
+        }
+        .button:hover {
+          border: 1px solid white;
         }
       `}</style>
     </>

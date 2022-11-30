@@ -1,4 +1,4 @@
-import { emptyChars } from "./levels";
+import { emptyChars, slotChars } from "./levels";
 
 export function average(n1, n2) {
   return (n1 + n2) / 2;
@@ -37,26 +37,26 @@ export function getValidMoves(state) {
     if (type === "hori") {
       // horizontal, y is the same
       // check left side
-      if (from.x > 0 && emptyChars.includes(state[from.y][from.x - 1])) {
+      if (from.x > 0 && slotChars.includes(state[from.y][from.x - 1])) {
         validMoves[`${to.x},${to.y}-${from.x - 1},${from.y}`] = true;
       }
       // check right side
       if (
         to.x < state[from.y].length - 1 &&
-        emptyChars.includes(state[from.y][to.x + 1])
+        slotChars.includes(state[from.y][to.x + 1])
       ) {
         validMoves[`${from.x},${from.y}-${to.x + 1},${to.y}`] = true;
       }
     } else {
       // verti
       // check top side
-      if (from.y > 0 && emptyChars.includes(state[from.y - 1][from.x])) {
+      if (from.y > 0 && slotChars.includes(state[from.y - 1][from.x])) {
         validMoves[`${to.x},${to.y}-${from.x},${from.y - 1}`] = true;
       }
       // check bottom side
       if (
         to.y < state.length - 1 &&
-        emptyChars.includes(state[to.y + 1][to.x])
+        slotChars.includes(state[to.y + 1][to.x])
       ) {
         validMoves[`${from.x},${from.y}-${to.x},${to.y + 1}`] = true;
       }

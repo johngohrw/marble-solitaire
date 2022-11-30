@@ -1,4 +1,4 @@
-import { emptyChars, walls } from "./levels";
+import { slotChars, walls } from "./levels";
 
 export default function Cell({
   char,
@@ -14,7 +14,7 @@ export default function Cell({
         {showOnlyWalls && walls.includes(char) && (
           <div className="wall" style={wallStyleMap[char]} />
         )}
-        {!showOnlyWalls && emptyChars.includes(char) && (
+        {!showOnlyWalls && slotChars.includes(char) && (
           <div className="empty" />
         )}
         {!showOnlyWalls && char === "o" && (
@@ -24,15 +24,15 @@ export default function Cell({
       <style jsx>{`
         .cell {
           position: relative;
-          width: 50px;
-          height: 50px;
+          aspect-ratio: 1;
           display: flex;
+          width: 100%;
           align-items: center;
           justify-content: center;
           user-select: none;
         }
         .wall {
-          background: #555;
+          background: #444;
           position: absolute;
         }
         .marble {
@@ -52,7 +52,7 @@ export default function Cell({
           width: 80%;
           height: 80%;
           border-radius: 50%;
-          background: grey;
+          background: #8b8b8b;
           cursor: pointer;
         }
       `}</style>

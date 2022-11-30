@@ -42,22 +42,21 @@ export default function Home() {
           </div>
           <div className="instructions">
             <h2>Instructions</h2>
-            <p>
-              Marble solitaire is played on a board with a grid of 33 holes. At
-              the start of the game there are marbles in every hole except for
-              the central hole.
-            </p>
+            <p>Marble solitaire is a simple game played on a grid board:</p>
             <img src="./demo.png" />
             <p>
-              Marbles can jump vertically or horizontally over a neighbouring
-              marble and into an empty hole on the other side. The marble that
-              was jumped over is then removed: You can select a marble by
-              clicking or tapping it. You can then jump by clicking or tapping
-              an empty hole.
+              Marbles can jump over a neighbour marble into an empty slot and
+              the marble that was jumped over is removed.
             </p>
+
             <p>
-              The aim of the game is to remove all of the marbles except for
-              one.
+              The aim of the game is to{" "}
+              <strong>remove all of the marbles except for one.</strong>
+            </p>
+
+            <p>
+              You can select a marble by clicking or tapping it. You can then
+              jump by clicking or tapping an empty hole.
             </p>
           </div>
         </main>
@@ -82,16 +81,19 @@ export default function Home() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          max-width: 1000px;
+          max-width: 600px;
         }
         .title {
           font-size: 2.5rem;
           margin-top: 1rem;
           color: #053934;
+          text-align: center;
         }
 
         .gameContainer {
           display: flex;
+          width: 100%;
+          max-width: min(100vw, 580px);
         }
         .instructions {
           margin-top: 2rem;
