@@ -43,22 +43,23 @@ export default function Home() {
             <MarbleGame level={level || "classic"} />
           </div>
           <div className="instructions">
-            <h2>Instructions</h2>
+            <h2>How to Play</h2>
             <p>Marble solitaire is a simple game played on a grid board:</p>
             <img src="./demo.png" />
             <p>
-              Marbles can jump over a neighbour marble into an empty slot and
-              the marble that was jumped over is removed.
+              Marbles can jump over a neighbouring marble into an empty slot and
+              the marble that was jumped over is removed. You can jump
+              horizontally and vertically.
             </p>
 
             <p>
-              The aim of the game is to{" "}
-              <strong>remove all of the marbles except for one.</strong>
+              To win, you'll have to{" "}
+              <strong>remove all marbles on the board except for one.</strong>
             </p>
 
             <p>
               You can select a marble by clicking or tapping it. You can then
-              jump by clicking or tapping an empty hole.
+              jump by clicking or tapping an empty slot.
             </p>
           </div>
         </main>
