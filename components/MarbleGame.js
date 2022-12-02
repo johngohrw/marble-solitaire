@@ -90,7 +90,6 @@ export default function MarbleGame({ level }) {
             style={{ height: "100px", width: "100px", marginBottom: "1rem" }}
           />
           <div style={{ marginBottom: "1rem" }}>You're insane!</div>
-
           <button className="button" onClick={restartGame}>
             Start over
           </button>

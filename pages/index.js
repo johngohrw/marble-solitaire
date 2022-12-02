@@ -19,7 +19,7 @@ export default function Home() {
     const params = new Proxy(new URLSearchParams(window.location.search), {
       get: (searchParams, prop) => searchParams.get(prop),
     });
-    const { level } = params;
+    const { l: level } = params;
     if (Object.prototype.hasOwnProperty.call(levels, level)) {
       setLevel(level);
     }

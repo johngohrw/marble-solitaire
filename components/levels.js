@@ -29,7 +29,12 @@ export const levels = {
     "██▌   ▐██",
     "███▄▄▄███",
   ],
-  unrated50: [
+
+  easy1: ["######", "# o o#", "#o oo#", "#o   #", "######"],
+  easy2: ["######", "# oo #", "#oooo#", "#oo o#", "######"],
+  easy3: ["######", "#ooo #", "#  o #", "# o  #", "#o oo#", "######"],
+  medium1: ["   #  o", "o#o  o#", " o o  #", "o# o  -", "ooo o#-", " # # ##"],
+  medium2: [
     "---   o#",
     "## #oo #",
     " o #   ",
@@ -38,8 +43,23 @@ export const levels = {
     "  #o oo ",
     "--#o oo ",
   ],
-  easy1: ["######", "# o o#", "#o oo#", "#o   #", "######"],
-  easy2: ["######", "# oo #", "#oooo#", "#oo o#", "######"],
-  easy3: ["######", "#ooo #", "#  o #", "# o  #", "#o oo#", "######"],
-  medium1: ["   #  o", "o#o  o#", " o o  #", "o# o  -", "ooo o#-", " # # ##"],
+  medium3: [
+    "         ",
+    "  o   o  ",
+    "oooo   o ",
+    "  o o  o ",
+    " oo oo  o",
+    "   o    o",
+  ],
+  hard1: [
+    "-    - -",
+    "  o  oo ",
+    " o o oo ",
+    "-oo o   ",
+    "  o#   ",
+    "o  o    ",
+    "o o  o  ",
+    " oo   o-",
+    "   oo o ",
+  ],
 };
