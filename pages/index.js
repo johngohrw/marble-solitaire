@@ -14,8 +14,10 @@ String.prototype.replaceAt = function (index, replacement) {
 
 export default function Home() {
   const [level, setLevel] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
+    console.log("router", router);
     const params = new Proxy(new URLSearchParams(window.location.search), {
       get: (searchParams, prop) => searchParams.get(prop),
     });
@@ -23,7 +25,7 @@ export default function Home() {
     if (Object.prototype.hasOwnProperty.call(levels, level)) {
       setLevel(level);
     }
-  }, []);
+  }, [router.asPath]);
 
   return (
     <>

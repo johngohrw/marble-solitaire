@@ -2,6 +2,7 @@ import useSound from "use-sound";
 import Cell from "./Cell";
 import { useEffect, useState } from "react";
 import { levels } from "./levels";
+import Router from "next/router";
 import { average, getValidMoves, winCheck } from "./utils";
 
 function getMaxRowLength(state) {
@@ -179,7 +180,22 @@ export default function MarbleGame({ level }) {
             ))}
           </div>
           <div className="gameOptions">
-            <div style={{ marginRight: "1rem" }}>Level: {level}</div>
+            <div
+              className="levelSelection"
+              style={{ marginRight: "1rem", display: "flex" }}
+            >
+              <span style={{ marginRight: "0.2rem" }}>Level:</span>
+              <select
+                value={level}
+                onChange={(e) =>
+                  Router.push(window.location.origin + `?l=` + e.target.value)
+                }
+              >
+                {Object.keys(levels).map((level) => (
+                  <option key={level}>{level}</option>
+                ))}
+              </select>
+            </div>
             <button className="button" onClick={restartGame}>
               Restart
             </button>{" "}
