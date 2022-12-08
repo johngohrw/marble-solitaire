@@ -16,8 +16,8 @@ export default function Home() {
   const [level, setLevel] = useState(null);
   const router = useRouter();
 
+  // when router changes, set level
   useEffect(() => {
-    console.log("router", router);
     const params = new Proxy(new URLSearchParams(window.location.search), {
       get: (searchParams, prop) => searchParams.get(prop),
     });

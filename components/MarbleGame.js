@@ -15,6 +15,11 @@ function getMaxRowLength(state) {
   return result;
 }
 
+function getNextLevel(current, allLevels) {
+  const keys = Object.keys(allLevels);
+  return keys[(keys.indexOf(current) + 1) % keys.length];
+}
+
 export default function MarbleGame({ level }) {
   const [restartState, setRestartState] = useState(
     levels[level] || levels.classic
@@ -91,9 +96,27 @@ export default function MarbleGame({ level }) {
             style={{ height: "100px", width: "100px", marginBottom: "1rem" }}
           />
           <div style={{ marginBottom: "1rem" }}>You're insane!</div>
-          <button className="button" onClick={restartGame}>
-            Start over
-          </button>
+          <div style={{ display: "flex", gap: "1rem" }}>
+            <button
+              className="button"
+              style={{ backgroundColor: "#333", borderColor: "#777" }}
+              onClick={restartGame}
+            >
+              Start over
+            </button>
+            <button
+              className="button"
+              onClick={() => {
+                getNextLevel(level, levels);
+                Router.push(
+                  window.location.origin + `?l=` + getNextLevel(level, levels)
+                );
+                restartGame();
+              }}
+            >
+              Next level
+            </button>
+          </div>
         </>
       );
     } else {
