@@ -20,10 +20,11 @@ function getNextLevel(current, allLevels) {
   return keys[(keys.indexOf(current) + 1) % keys.length];
 }
 
-export default function MarbleGame({ level }) {
+export default function MarbleGame({ level, devMode }) {
   const [restartState, setRestartState] = useState(
     levels[level] || levels.classic
   );
+  const [prevStates, setPrevStates] = useState([]);
   const [state, setState] = useState(levels[level] || levels.classic);
   const [validMoves, setValidMoves] = useState(
     getValidMoves(levels[level] || levels.classic)
@@ -64,6 +65,7 @@ export default function MarbleGame({ level }) {
   }, [hist]);
 
   function makeMove(moveString) {
+    setPrevStates([...prevStates, JSON.parse(JSON.stringify(state))]);
     const from = moveString
       .split("-")[0]
       .split(",")
@@ -79,6 +81,16 @@ export default function MarbleGame({ level }) {
     newState[to[1]] = newState[to[1]].replaceAt(to[0], "o"); // to becomes a marble
     setState(newState);
     playClick();
+  }
+
+  function undo() {
+    if (prevStates.length > 0) {
+      const newState = prevStates[prevStates.length - 1];
+      setState(newState);
+      setPrevStates(prevStates.slice(0, -1));
+    } else {
+      alert("i can't undo nothin");
+    }
   }
 
   function restartGame() {
@@ -222,6 +234,11 @@ export default function MarbleGame({ level }) {
             <button className="button" onClick={restartGame}>
               Restart
             </button>{" "}
+            {devMode && (
+              <button className="button" onClick={undo}>
+                Undo
+              </button>
+            )}
           </div>
         </div>
       </div>

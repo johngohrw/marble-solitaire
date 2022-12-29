@@ -14,6 +14,7 @@ String.prototype.replaceAt = function (index, replacement) {
 
 export default function Home() {
   const [level, setLevel] = useState(null);
+  const [isDev, setIsDev] = useState(false);
   const router = useRouter();
 
   // when router changes, set level
@@ -21,10 +22,11 @@ export default function Home() {
     const params = new Proxy(new URLSearchParams(window.location.search), {
       get: (searchParams, prop) => searchParams.get(prop),
     });
-    const { l: level } = params;
+    const { l: level, d: devMode } = params;
     if (Object.prototype.hasOwnProperty.call(levels, level)) {
       setLevel(level);
     }
+    setIsDev(devMode);
   }, [router.asPath]);
 
   return (
@@ -40,7 +42,7 @@ export default function Home() {
           <h1 className="title">Marble Solitaire</h1>
 
           <div className="gameContainer">
-            <MarbleGame level={level || "classic"} />
+            <MarbleGame level={level || "classic"} devMode={isDev} />
           </div>
           <div className="instructions">
             <h2>How to Play</h2>
