@@ -53,6 +53,33 @@ export const levels = {
     " oo   o-",
     "   oo o ",
   ],
+  medium4: [
+    "      oo ",
+    "     o   ",
+    " o ooo o ",
+    "o  o    o",
+    "  o      ",
+    "oo      o",
+    "o  o o o ",
+  ],
+  medium5: [
+    " o   oo oo",
+    " o   o ▚ ▞",
+    "o o o oo  ",
+    " o   o ▞o▚",
+    " o   o   -",
+  ],
+  //   "       ▗▄▄  ",
+  // "       ▐▚   ",
+  // "       ▐ ▚  ",
+  // "          ▚ "
+  medium6: [
+    " o           ",
+    "oo o     # o ",
+    "o  oooooooo  ",
+    " ooo o    o ",
+    "  o o   o   ",
+  ],
   hard1: [
     "         ",
     "  o   o  ",
