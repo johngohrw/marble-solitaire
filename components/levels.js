@@ -2,10 +2,11 @@ export const walls = "#█▌▐▀▄▖▗▝▘▚▞";
 export const emptyChars = "-";
 export const slotChars = "_ ";
 
-// state legend:
+// board state legend:
 // # = wall
 // o = marble
-// _ = empty space
+//   = empty marble space (slot)
+// - = nothing (no slot)
 export const levels = {
   classic: [
     "███▀▀▀███",
@@ -18,17 +19,6 @@ export const levels = {
     "██▌ooo▐██",
     "███▄▄▄███",
   ],
-  // freewin: [
-  //   "███▀▀▀███",
-  //   "██▌   ▐██",
-  //   "█▀▘   ▝▀█",
-  //   "▌       ▐",
-  //   "▌ oo    ▐",
-  //   "▌       ▐",
-  //   "█▄▖   ▗▄█",
-  //   "██▌   ▐██",
-  //   "███▄▄▄███",
-  // ],
   easy1: ["######", "# o o#", "#o oo#", "#o   #", "######"],
   easy2: ["######", "# oo #", "#oooo#", "#oo o#", "######"],
   easy3: ["######", "#ooo #", "#  o #", "# o  #", "#o oo#", "######"],
@@ -69,7 +59,7 @@ export const levels = {
     " o   o ▞o▚",
     " o   o   -",
   ],
-  //   "       ▗▄▄  ",
+  // "       ▗▄▄  ",
   // "       ▐▚   ",
   // "       ▐ ▚  ",
   // "          ▚ "
