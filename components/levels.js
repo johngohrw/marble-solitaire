@@ -155,7 +155,7 @@ export const levels = {
       "  o o o  ",
       " ooo ooo ",
       " oo o oo ",
-      "  o o o  ",
+      "  o#o#o  ",
       "oo o    -",
     ],
     [
