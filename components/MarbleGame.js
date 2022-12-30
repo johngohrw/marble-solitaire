@@ -45,6 +45,7 @@ export default function MarbleGame({ level, devMode }) {
   useEffect(() => {
     setRestartState(levels[level]);
     setState(levels[level]);
+    setPrevStates([]);
   }, [level]);
 
   useEffect(() => {

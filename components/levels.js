@@ -132,6 +132,15 @@ export const levels = {
   ],
   hard: [
     [
+      // propagation
+      "o-ooo - -",
+      " o oo-  o",
+      "oo   -oo#",
+      "o  o   o#",
+      " ooooo-- ",
+      "--o  o- -",
+    ],
+    [
       // looks simple but tricky
       "         ",
       "  o   o  ",
@@ -141,13 +150,13 @@ export const levels = {
       "   o    o",
     ],
     [
-      // propagation
-      "o-ooo - -",
-      " o oo-  o",
-      "oo   -oo#",
-      "o  o   o#",
-      " ooooo-- ",
-      "--o  o- -",
+      // crucifixes
+      "-    o oo",
+      "  o o o  ",
+      " ooo ooo ",
+      " oo o oo ",
+      "  o o o  ",
+      "oo o    -",
     ],
     [
       // RAILROAD EXPRESS
