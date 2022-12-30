@@ -15,6 +15,7 @@ String.prototype.replaceAt = function (index, replacement) {
 export default function Home() {
   const [level, setLevel] = useState(null);
   const [isDev, setIsDev] = useState(false);
+  const [showHelpOverlay, setShowHelpOverlay] = useState(false);
   const router = useRouter();
 
   // when router changes, set level
@@ -29,6 +30,10 @@ export default function Home() {
     setIsDev(devMode);
   }, [router.asPath]);
 
+  useEffect(() => {
+    setShowHelpOverlay(true);
+  }, []);
+
   return (
     <>
       <div className="page">
@@ -39,15 +44,21 @@ export default function Home() {
         </Head>
 
         <main className="container">
-          <h1 className="title">Marble Solitaire</h1>
+          <img className="logo" src="./logo.svg" />
 
           <div className="gameContainer">
             <MarbleGame level={level || "classic"} devMode={isDev} />
           </div>
+        </main>
+
+        <div className="overlay">
           <div className="instructions">
             <h2>How to Play</h2>
             <p>Marble solitaire is a simple game played on a grid board:</p>
-            <img src="./demo.png" />
+            <img
+              src="./demo.png"
+              style={{ background: "rgb(203, 204, 176)", borderRadius: "16px" }}
+            />
             <p>
               Marbles can jump over a neighbouring marble into an empty slot and
               the marble that was jumped over is removed. You can jump
@@ -63,8 +74,14 @@ export default function Home() {
               You can select a marble by clicking or tapping it. You can then
               jump by clicking or tapping an empty slot.
             </p>
+            <button
+              className="button"
+              onClick={() => setShowHelpOverlay(false)}
+            >
+              Got it
+            </button>
           </div>
-        </main>
+        </div>
 
         <footer className="">
           <a
@@ -81,12 +98,16 @@ export default function Home() {
           display: flex;
           flex-direction: column;
           align-items: center;
+          justify-content: center;
+          min-height: 100vh;
+          position: relative;
         }
         .container {
           display: flex;
           flex-direction: column;
           align-items: center;
-          max-width: 600px;
+          max-width: 680px;
+          width: 100%;
         }
         .title {
           font-size: 2.5rem;
@@ -94,15 +115,47 @@ export default function Home() {
           color: #053934;
           text-align: center;
         }
+        .logo {
+          height: 90px;
+          margin: 0.5rem 0 1rem;
+          max-width: 90vw;
 
+          filter: invert(34%) sepia(39%) saturate(1910%) hue-rotate(139deg)
+            brightness(94%) contrast(101%);
+        }
         .gameContainer {
           display: flex;
           width: 100%;
-          max-width: min(100vw, 580px);
+          max-width: min(100vw, 100%);
         }
+
+        .overlay {
+          position: absolute;
+          background: rgba(0, 0, 0, 0.5);
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+
+          transition-duration: 500ms;
+
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          color: white;
+          backdrop-filter: blur(10px);
+
+          opacity: ${showHelpOverlay ? 1 : 0};
+          user-select: none;
+          pointer-events: ${showHelpOverlay ? "auto" : "none"};
+        }
+
         .instructions {
           margin-top: 2rem;
           text-align: center;
+          max-width: 500px;
         }
       `}</style>
     </>
