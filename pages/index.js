@@ -97,7 +97,7 @@ export default function Home() {
           </div>
         </div>
 
-        <footer className="">
+        <footer className="footer">
           <a
             href="https://john.shiksha"
             target="_blank"
@@ -150,6 +150,7 @@ export default function Home() {
           bottom: 0;
           left: 0;
           right: 0;
+          z-index: 10;
 
           transition-duration: 500ms;
 
@@ -179,6 +180,10 @@ export default function Home() {
 
           filter: invert(34%) sepia(39%) saturate(1910%) hue-rotate(139deg)
             brightness(94%) contrast(101%);
+        }
+
+        .footer {
+
         }
       `}</style>
     </>
