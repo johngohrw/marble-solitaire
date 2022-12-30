@@ -274,6 +274,7 @@ export default function MarbleGame({ level, devMode }) {
           width: 100%;
           height: 100%;
           background: rgba(52, 52, 53, 0.83);
+          border-radius: 16px;
           z-index: 1;
 
           display: flex;
