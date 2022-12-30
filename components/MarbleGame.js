@@ -284,6 +284,8 @@ export default function MarbleGame({ level, devMode }) {
 
           color: white;
           transition-duration: 500ms;
+          backdrop-filter: blur(2px);
+
           opacity: ${showOverlay ? 1 : 0};
           user-select: none;
           pointer-events: ${showOverlay ? "auto" : "none"};
