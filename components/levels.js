@@ -7,88 +7,171 @@ export const slotChars = "_ ";
 // o = marble
 //   = empty marble space (slot)
 // - = nothing (no slot)
+
+// "       ▗▄▄  ",
+// "       ▐▚   ",
+// "       ▐ ▚  ",
+// "          ▚ "
+
 export const levels = {
   classic: [
-    "███▀▀▀███",
-    "██▌ooo▐██",
-    "█▀▘ooo▝▀█",
-    "▌ooooooo▐",
-    "▌ooo ooo▐",
-    "▌ooooooo▐",
-    "█▄▖ooo▗▄█",
-    "██▌ooo▐██",
-    "███▄▄▄███",
+    [
+      "▄██▀▀▀██▄",
+      "██▌ooo▐██",
+      "█▀▘ooo▝▀█",
+      "▌ooooooo▐",
+      "▌ooo ooo▐",
+      "▌ooooooo▐",
+      "█▄▖ooo▗▄█",
+      "██▌ooo▐██",
+      "▀██▄▄▄██▀",
+    ],
   ],
-  easy1: ["######", "# o o#", "#o oo#", "#o   #", "######"],
-  easy2: ["######", "# oo #", "#oooo#", "#oo o#", "######"],
-  easy3: ["######", "#ooo #", "#  o #", "# o  #", "#o oo#", "######"],
-  easy4: ["   #  o", "o#o  o#", " o o  #", "o# o  -", "ooo o#-", " # # ##"],
-  medium1: [" ##  #", " oo --#", "# #o o", " oo o #", "#ooo o", "  o o #"],
-  medium2: [
-    "---   o#",
-    "## #oo #",
-    " o #   ",
-    "o#o oo ",
-    "ooo o   ",
-    "  #o oo ",
-    "--#o oo ",
-  ],
-  medium3: [
-    "      oo ",
-    "     o   ",
-    " o ooo o ",
-    "o  o    o",
-    "  o      ",
-    "oo      o",
-    "o  o o o ",
-  ],
-  medium4: [
-    " o   oo oo",
-    " o   o ▚ ▞",
-    "o o o oo  ",
-    " o   o ▞o▚",
-    " o   o   -",
-  ],
-  medium5: [
-    " o         ",
-    "oo o    # o",
-    "o #ooooooo ",
-    " ooo o   o ",
-    "  o o  o   ",
-  ],
-  medium6: [
-    "-    - -",
-    "  o  oo ",
-    " o o oo ",
-    "-oo o   ",
-    "  o#   ",
-    "o  o    ",
-    "o o  o  ",
-    " oo   o-",
-    "   oo o ",
-  ],
-  // "       ▗▄▄  ",
-  // "       ▐▚   ",
-  // "       ▐ ▚  ",
-  // "          ▚ "
+  easy: [
+    [
+      // baby steps
+      "######",
+      "# o o#",
+      "#o oo#",
+      "#o   #",
+      "######",
+    ],
+    [
+      // don't make the wrong move
+      "######",
+      "# oo #",
+      "#oooo#",
+      "#oo o#",
+      "######",
+    ],
+    [
+      // lol
+      "### ##",
+      "#ooo #",
+      "oo o #",
+      "#-o -#",
+      "#oooo#",
+      "######",
+    ],
+    [
+      // rescue
+      "   #  o",
+      "o#o  o#",
+      " o o  #",
+      "o# o  -",
+      "ooo o#-",
+      " # # ##",
+    ],
 
-  hard1: [
-    "         ",
-    "  o   o  ",
-    "oooo   o ",
-    "  o o  o ",
-    " oo oo  o",
-    "   o    o",
+    [
+      // checkerboard
+      "oo  oo",
+      "oo  oo",
+      "  oo  ",
+      "  oo  ",
+      "##  oo",
+      "##  oo",
+    ],
   ],
-  hard2: [
-    "#-#-#-#-#-#",
-    " o      oo ",
-    "-  o#o oo o",
-    " o o o    o",
-    "  o o o o  ",
-    " o #ooo# o ",
-    "o -   o - o",
-    " o oo# o o ",
-    "# # o   # #",
+  medium: [
+    [
+      "---   o#",
+      "## #oo #",
+      " o #   ",
+      "o#o oo ",
+      "ooo o   ",
+      "  #o oo ",
+      "--#o oo ",
+    ],
+    [
+      // around the world
+      "      oo ",
+      "     o   ",
+      " o ooo o ",
+      "o  o    o",
+      "  o      ",
+      "oo      o",
+      "o  o o o ",
+    ],
+    [
+      // crosshair
+      " o   oo oo",
+      " o   o ▚ ▞",
+      "o o o oo  ",
+      " o   o ▞o▚",
+      " o   o   -",
+    ],
+    [
+      // fishbone
+      " o         ",
+      "oo o    # o",
+      "o #ooooooo ",
+      " ooo o   o ",
+      "  o o  o   ",
+    ],
+    [
+      "-    - -",
+      "  o  oo ",
+      " o o oo ",
+      "-oo o   ",
+      "  o#   ",
+      "o  o    ",
+      "o o  o  ",
+      " oo   o-",
+      "   oo o ",
+    ],
+    [
+      // careful
+      " ##  #",
+      " oo --#",
+      "# #o o",
+      " oo o #",
+      "#ooo o",
+      "  o o #",
+    ],
+  ],
+  hard: [
+    [
+      // looks simple but tricky
+      "         ",
+      "  o   o  ",
+      "oooo   o ",
+      "  o o  o ",
+      " oo oo  o",
+      "   o    o",
+    ],
+    [
+      // propagation
+      "o-ooo - -",
+      " o oo-  o",
+      "oo   -oo#",
+      "o  o   o#",
+      " ooooo-- ",
+      "--o  o- -",
+    ],
+    [
+      // RAILROAD EXPRESS
+      "#-#-#-#-#-#",
+      " o      oo ",
+      "-  o#o oo o",
+      " o o o    o",
+      "  o o o o  ",
+      " o #ooo# o ",
+      "o -   o - o",
+      " o oo# o o ",
+      "# # o   # #",
+    ],
   ],
 };
+
+export function transformLevels(levelObj) {
+  const categoryList = Object.keys(levelObj);
+  let levels = [];
+  categoryList.forEach((category) => {
+    levelObj[category].forEach((map, index) => {
+      const levelID = `${category}${(index + 1).toString().padStart(2, 0)}`;
+      levels[levelID] = map;
+    });
+  });
+  return levels;
+}

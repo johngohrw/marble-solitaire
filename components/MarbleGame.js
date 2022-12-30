@@ -1,9 +1,11 @@
 import useSound from "use-sound";
 import Cell from "./Cell";
 import { useEffect, useState } from "react";
-import { levels } from "./levels";
+import { levels as levelsPreTransform, transformLevels } from "./levels";
 import Router from "next/router";
 import { average, getValidMoves, winCheck } from "./utils";
+
+const levels = transformLevels(levelsPreTransform);
 
 function getMaxRowLength(state) {
   let result = 0;
@@ -22,12 +24,12 @@ function getNextLevel(current, allLevels) {
 
 export default function MarbleGame({ level, devMode }) {
   const [restartState, setRestartState] = useState(
-    levels[level] || levels.classic
+    levels[level] || levels.classic01
   );
   const [prevStates, setPrevStates] = useState([]);
-  const [state, setState] = useState(levels[level] || levels.classic);
+  const [state, setState] = useState(levels[level] || levels.classic01);
   const [validMoves, setValidMoves] = useState(
-    getValidMoves(levels[level] || levels.classic)
+    getValidMoves(levels[level] || levels.classic01)
   );
   const [hist, setHist] = useState([]);
   const [showOverlay, setShowOverlay] = useState(false);
@@ -37,6 +39,7 @@ export default function MarbleGame({ level, devMode }) {
   const [playShuffle] = useSound("./marbleshuffle.mp3", { volume: 0.35 });
   const [playLose] = useSound("./toddlercry.wav", { volume: 0.15 });
   const [playTada] = useSound("./tada.mp3", { volume: 0.25 });
+  const [playUndo] = useSound("./swoosh.mp3", { volume: 0.75 });
 
   // restart if level changes
   useEffect(() => {
@@ -89,6 +92,7 @@ export default function MarbleGame({ level, devMode }) {
       const newState = prevStates[prevStates.length - 1];
       setState(newState);
       setPrevStates(prevStates.slice(0, -1));
+      playUndo();
     } else {
       alert("i can't undo nothin");
     }
@@ -235,7 +239,11 @@ export default function MarbleGame({ level, devMode }) {
               Restart
             </button>{" "}
             {devMode && (
-              <button className="button" onClick={undo}>
+              <button
+                style={{ marginLeft: "0.5rem" }}
+                className="button"
+                onClick={undo}
+              >
                 Undo
               </button>
             )}
@@ -274,7 +282,6 @@ export default function MarbleGame({ level, devMode }) {
           width: 100%;
           height: 100%;
           background: rgba(52, 52, 53, 0.83);
-          border-radius: 16px;
           z-index: 1;
 
           display: flex;
@@ -289,6 +296,12 @@ export default function MarbleGame({ level, devMode }) {
           opacity: ${showOverlay ? 1 : 0};
           user-select: none;
           pointer-events: ${showOverlay ? "auto" : "none"};
+        }
+
+        @media (min-width: 680px) {
+          .overlay {
+            border-radius: 16px;
+          }
         }
 
         .overlayInner {
@@ -331,19 +344,6 @@ export default function MarbleGame({ level, devMode }) {
           flex-direction: row;
           align-items: center;
           justify-content: center;
-        }
-      `}</style>
-      <style jsx global>{`
-        .button {
-          border: 1px solid #4b817b;
-          background: #24504c;
-          color: white;
-          padding: 0.5rem 1rem;
-          border-radius: 24px;
-          cursor: pointer;
-        }
-        .button:hover {
-          border: 1px solid white;
         }
       `}</style>
     </>

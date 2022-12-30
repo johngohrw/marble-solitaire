@@ -1,8 +1,14 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { levels } from "../components/levels";
+import {
+  levels as levelsPreTransform,
+  transformLevels,
+} from "../components/levels";
 import MarbleGame from "../components/MarbleGame";
+import { lippyAwayCipher } from "../components/utils";
+
+const levels = transformLevels(levelsPreTransform);
 
 String.prototype.replaceAt = function (index, replacement) {
   return (
@@ -20,15 +26,18 @@ export default function Home() {
   const router = useRouter();
 
   // when router changes, set level
+  // also check for devMode conditions
   useEffect(() => {
     const params = new Proxy(new URLSearchParams(window.location.search), {
       get: (searchParams, prop) => searchParams.get(prop),
     });
-    const { l: level, d: devMode } = params;
+    const { l: level, d: devMode, lip } = params;
     if (Object.prototype.hasOwnProperty.call(levels, level)) {
       setLevel(level);
     }
-    setIsDev(devMode);
+    if (devMode && lip) {
+      setIsDev(lippyAwayCipher(lip, devMode) === "ztr");
+    }
   }, [router.asPath]);
 
   useEffect(() => {
@@ -61,7 +70,7 @@ export default function Home() {
           </button>
 
           <div className="gameContainer">
-            <MarbleGame level={level || "classic"} devMode={isDev} />
+            <MarbleGame level={level || "classic01"} devMode={isDev} />
           </div>
         </main>
 
@@ -107,6 +116,19 @@ export default function Home() {
           </a>
         </footer>
       </div>
+      <style jsx global>{`
+        .button {
+          border: 1px solid #4b817b;
+          background: #24504c;
+          color: white;
+          padding: 0.5rem 1rem;
+          border-radius: 24px;
+          cursor: pointer;
+        }
+        .button:hover {
+          background: #2672a9;
+        }
+      `}</style>
       <style jsx>{`
         .page {
           display: flex;
@@ -137,6 +159,7 @@ export default function Home() {
           filter: invert(34%) sepia(39%) saturate(1910%) hue-rotate(139deg)
             brightness(94%) contrast(101%);
         }
+
         .gameContainer {
           display: flex;
           width: 100%;
@@ -168,7 +191,7 @@ export default function Home() {
         }
 
         .instructions {
-          margin-top: 2rem;
+          margin: 1.5rem;
           text-align: center;
           max-width: 500px;
         }
@@ -181,9 +204,12 @@ export default function Home() {
           filter: invert(34%) sepia(39%) saturate(1910%) hue-rotate(139deg)
             brightness(94%) contrast(101%);
         }
+        .credits:hover {
+          filter: invert(53%) sepia(70%) saturate(433%) hue-rotate(162deg)
+            brightness(91%) contrast(91%);
+        }
 
         .footer {
-
         }
       `}</style>
     </>
