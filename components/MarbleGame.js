@@ -32,6 +32,7 @@ export default function MarbleGame({ level, devMode }) {
   const [hist, setHist] = useState([]);
   const [overlayMessage, setOverlayMessage] = useState("message");
   const [showOverlay, setShowOverlay] = useState(false);
+  const [winState, setWinState] = useState(false);
 
   const [playClick] = useSound("./click-perc.wav", { volume: 0.25 });
   const [playLose] = useSound("./toddlercry.wav", { volume: 0.15 });
@@ -100,52 +101,11 @@ export default function MarbleGame({ level, devMode }) {
 
   function endGame(win) {
     if (win) {
+      setWinState(true);
       playTada();
-      setOverlayMessage(
-        <>
-          <img
-            src="./tada.jpg"
-            style={{ height: "100px", width: "100px", marginBottom: "1rem" }}
-          />
-          <div style={{ marginBottom: "1rem" }}>You're insane!</div>
-          <div style={{ display: "flex", gap: "1rem" }}>
-            <button
-              className="button"
-              style={{ backgroundColor: "#333", borderColor: "#777" }}
-              onClick={restartGame}
-            >
-              Start over
-            </button>
-            <button
-              className="button"
-              onClick={() => {
-                getNextLevel(level, levels);
-                Router.push(
-                  window.location.origin + `?l=` + getNextLevel(level, levels)
-                );
-                restartGame();
-              }}
-            >
-              Next level
-            </button>
-          </div>
-        </>
-      );
     } else {
+      setWinState(false);
       playLose();
-      setOverlayMessage(
-        <>
-          <img
-            src="./yay.jpg"
-            style={{ height: "100px", width: "100px", marginBottom: "1rem" }}
-          />
-          <div style={{ marginBottom: "1rem" }}>No moves left</div>
-
-          <button className="button" onClick={restartGame}>
-            Try again
-          </button>
-        </>
-      );
     }
     setShowOverlay(true);
   }
@@ -161,7 +121,58 @@ export default function MarbleGame({ level, devMode }) {
             pointerEvents: showOverlay ? "auto" : "none",
           }}
         >
-          {overlayMessage}
+          {winState ? (
+            <>
+              <img
+                src="./tada.jpg"
+                style={{
+                  height: "100px",
+                  width: "100px",
+                  marginBottom: "1rem",
+                }}
+              />
+              <div style={{ marginBottom: "1rem" }}>You're insane!</div>
+              <div style={{ display: "flex", gap: "1rem" }}>
+                <button
+                  className="button"
+                  style={{ backgroundColor: "#333", borderColor: "#777" }}
+                  onClick={restartGame}
+                >
+                  Start over
+                </button>
+                <button
+                  className="button"
+                  onClick={() => {
+                    getNextLevel(level, levels);
+                    Router.push(
+                      window.location.origin +
+                        `?l=` +
+                        getNextLevel(level, levels)
+                    );
+                    restartGame();
+                  }}
+                >
+                  Next level
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <img
+                src="./yay.jpg"
+                style={{
+                  height: "100px",
+                  width: "100px",
+                  marginBottom: "1rem",
+                }}
+              />
+              <div style={{ marginBottom: "1rem" }}>No moves left</div>
+
+              <button className="button" onClick={restartGame}>
+                Try again
+              </button>
+            </>
+          )}
         </div>
         <div className="game">
           <div className="grid walls" style={{ userSelect: "none" }}>
