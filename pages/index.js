@@ -7,6 +7,7 @@ import {
 } from "../components/levels";
 import MarbleGame from "../components/MarbleGame";
 import { lippyAwayCipher } from "../components/utils";
+import { GiSpeaker, GiSpeakerOff } from "react-icons/gi";
 
 const levels = transformLevels(levelsPreTransform);
 
@@ -21,8 +22,8 @@ String.prototype.replaceAt = function (index, replacement) {
 export default function Home() {
   const [level, setLevel] = useState(null);
   const [isDev, setIsDev] = useState(false);
+  const [allowSound, setAllowSound] = useState(true);
   const [showHelpOverlay, setShowHelpOverlay] = useState(false);
-  const [isFirstSession, setIsFirstSession] = useState(false);
   const router = useRouter();
 
   // when router changes, set level
@@ -45,7 +46,6 @@ export default function Home() {
 
     if (!alreadyVisited) {
       setShowHelpOverlay(true);
-      setIsFirstSession(true);
       localStorage.setItem("alreadyVisited", true);
     }
   }, []);
@@ -61,16 +61,29 @@ export default function Home() {
 
         <main className="container">
           <img className="logo" src="./logo.svg" />
-          <button
-            className="button"
-            style={{ marginBottom: "0.5rem" }}
-            onClick={() => setShowHelpOverlay(true)}
-          >
-            How to play
-          </button>
+          <div style={{ marginBottom: "0.5rem", display: "flex" }}>
+            <button
+              className="button"
+              style={{ marginLeft: "0.5rem" }}
+              onClick={() => setShowHelpOverlay(true)}
+            >
+              How to play
+            </button>
+            <button
+              className="button soundButton"
+              style={{ marginLeft: "0.5rem" }}
+              onClick={() => setAllowSound(!allowSound)}
+            >
+              {allowSound ? <GiSpeaker /> : <GiSpeakerOff />}
+            </button>
+          </div>
 
           <div className="gameContainer">
-            <MarbleGame level={level || "classic01"} devMode={isDev} />
+            <MarbleGame
+              level={level || "classic01"}
+              devMode={isDev}
+              soundEffects={allowSound}
+            />
           </div>
         </main>
 
@@ -127,6 +140,13 @@ export default function Home() {
         }
         .button:hover {
           background: #2672a9;
+        }
+        .soundButton {
+          padding: 0.1rem 0.5rem 0;
+        }
+        .soundButton svg {
+          height: 24px;
+          width: 24px;
         }
       `}</style>
       <style jsx>{`

@@ -1,4 +1,5 @@
 import { slotChars, walls } from "./levels";
+import { getRandomArbitrary } from "./utils";
 
 export default function Cell({
   char,
@@ -12,17 +13,22 @@ export default function Cell({
     <>
       <div className="cell" {...rest}>
         {showOnlyWalls && walls.includes(char) && (
-          <div className="wall" style={wallStyleMap[char]} />
+          <div className="wall" style={wallStyleMap[char]}></div>
         )}
         {!showOnlyWalls && slotChars.includes(char) && (
-          <div className="empty" />
+          <div className="empty">
+            <div></div>
+          </div>
         )}
         {!showOnlyWalls && char === "o" && (
-          <div className={`marble ${active && "active"}`} />
+          <div className={`marble ${active && "active"}`}>
+            <div></div>
+          </div>
         )}
       </div>
       <style jsx>{`
         .cell {
+          -webkit-tap-highlight-color: transparent;
           position: relative;
           aspect-ratio: 1;
           display: flex;
@@ -31,6 +37,7 @@ export default function Cell({
           justify-content: center;
           user-select: none;
         }
+
         .wall {
           background: #444;
           position: absolute;
@@ -42,18 +49,49 @@ export default function Cell({
           border-radius: 50%;
           background: #008073;
           cursor: pointer;
+          transition-duration: 90ms;
         }
-
         .marble.active {
-          border: 3px solid black;
+          transform: scale(1.1);
+          background: #039b8b;
+          box-shadow: -3px 3px 15px -3px rgba(0, 0, 0, 0.6);
+        }
+        .marble > div {
+          position: absolute;
+          top: ${19}%;
+          left: ${53}%;
+          width: 40%;
+          height: 40%;
+          background: rgba(255, 255, 255, 0.5);
+          border-radius: 50%;
+          filter: blur(calc(min(100vw, 680px) / 70));
+          transition-duration: 60ms;
+        }
+        .marble.active > div {
+          top: ${15}%;
+          left: ${45}%;
+          width: 50%;
+          height: 50%;
+          background: rgba(255, 255, 255, 0.8);
+          filter: blur(8px);
         }
         .empty {
           position: absolute;
           width: 80%;
           height: 80%;
           border-radius: 50%;
-          background: #8b8b8b;
+          background: #878787;
           cursor: pointer;
+        }
+        .empty > div {
+          position: absolute;
+          top: 28%;
+          left: 17%;
+          width: 55%;
+          height: 55%;
+          background: rgba(255, 255, 255, 0.7);
+          border-radius: 50%;
+          filter: blur(16px);
         }
       `}</style>
     </>

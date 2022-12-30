@@ -1,28 +1,19 @@
 import useSound from "use-sound";
 import Cell from "./Cell";
 import { useEffect, useState } from "react";
-import { levels as levelsPreTransform, transformLevels } from "./levels";
+import { levels as levelsBeforeTransform, transformLevels } from "./levels";
 import Router from "next/router";
-import { average, getValidMoves, winCheck } from "./utils";
+import {
+  average,
+  getMaxRowLength,
+  getNextLevel,
+  getValidMoves,
+  winCheck,
+} from "./utils";
 
-const levels = transformLevels(levelsPreTransform);
+const levels = transformLevels(levelsBeforeTransform);
 
-function getMaxRowLength(state) {
-  let result = 0;
-  state.forEach((row) => {
-    if (row.length > result) {
-      result = row.length;
-    }
-  });
-  return result;
-}
-
-function getNextLevel(current, allLevels) {
-  const keys = Object.keys(allLevels);
-  return keys[(keys.indexOf(current) + 1) % keys.length];
-}
-
-export default function MarbleGame({ level, devMode }) {
+export default function MarbleGame({ level, devMode, soundEffects }) {
   const [restartState, setRestartState] = useState(
     levels[level] || levels.classic01
   );
@@ -35,11 +26,21 @@ export default function MarbleGame({ level, devMode }) {
   const [showOverlay, setShowOverlay] = useState(false);
   const [winState, setWinState] = useState(false);
 
-  const [playClick] = useSound("./click-perc.wav", { volume: 0.25 });
-  const [playShuffle] = useSound("./marbleshuffle.mp3", { volume: 0.35 });
-  const [playLose] = useSound("./toddlercry.wav", { volume: 0.15 });
-  const [playTada] = useSound("./tada.mp3", { volume: 0.25 });
-  const [playUndo] = useSound("./swoosh.mp3", { volume: 0.75 });
+  const [playClick] = useSound("./click-perc.wav", {
+    volume: soundEffects ? 0.25 : 0,
+  });
+  const [playShuffle] = useSound("./marbleshuffle.mp3", {
+    volume: soundEffects ? 0.35 : 0,
+  });
+  const [playLose] = useSound("./toddlercry.wav", {
+    volume: soundEffects ? 0.15 : 0,
+  });
+  const [playTada] = useSound("./tada.mp3", {
+    volume: soundEffects ? 0.25 : 0,
+  });
+  const [playUndo] = useSound("./swoosh.mp3", {
+    volume: soundEffects ? 0.75 : 0,
+  });
 
   // restart if level changes
   useEffect(() => {
@@ -48,16 +49,19 @@ export default function MarbleGame({ level, devMode }) {
     setPrevStates([]);
   }, [level]);
 
+  // get valid moves whenever state changes
   useEffect(() => {
     setValidMoves(getValidMoves(state));
   }, [state]);
 
+  // check win/lose condition when there are no valid moves left
   useEffect(() => {
     if (Object.keys(validMoves).length <= 0) {
       endGame(winCheck(state));
     }
   }, [validMoves]);
 
+  // check if previously made move is a valid move
   useEffect(() => {
     if (hist.length > 1) {
       const from = hist[hist.length - 2];

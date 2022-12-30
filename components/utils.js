@@ -1,4 +1,4 @@
-import { emptyChars, slotChars } from "./levels";
+import { slotChars } from "./levels";
 
 export function average(n1, n2) {
   return (n1 + n2) / 2;
@@ -100,3 +100,22 @@ export const lippyAwayCipher = (string, number) => {
   }
   return output;
 };
+
+export function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+export function getMaxRowLength(state) {
+  let result = 0;
+  state.forEach((row) => {
+    if (row.length > result) {
+      result = row.length;
+    }
+  });
+  return result;
+}
+
+export function getNextLevel(current, allLevels) {
+  const keys = Object.keys(allLevels);
+  return keys[(keys.indexOf(current) + 1) % keys.length];
+}
