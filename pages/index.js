@@ -16,6 +16,7 @@ export default function Home() {
   const [level, setLevel] = useState(null);
   const [isDev, setIsDev] = useState(false);
   const [showHelpOverlay, setShowHelpOverlay] = useState(false);
+  const [isFirstSession, setIsFirstSession] = useState(false);
   const router = useRouter();
 
   // when router changes, set level
@@ -31,7 +32,13 @@ export default function Home() {
   }, [router.asPath]);
 
   useEffect(() => {
-    setShowHelpOverlay(true);
+    const alreadyVisited = localStorage.getItem("alreadyVisited");
+
+    if (!alreadyVisited) {
+      setShowHelpOverlay(true);
+      setIsFirstSession(true);
+      localStorage.setItem("alreadyVisited", true);
+    }
   }, []);
 
   return (
@@ -45,13 +52,20 @@ export default function Home() {
 
         <main className="container">
           <img className="logo" src="./logo.svg" />
+          <button
+            className="button"
+            style={{ marginBottom: "0.5rem" }}
+            onClick={() => setShowHelpOverlay(true)}
+          >
+            How to play
+          </button>
 
           <div className="gameContainer">
             <MarbleGame level={level || "classic"} devMode={isDev} />
           </div>
         </main>
 
-        <div className="overlay">
+        <div className="overlay" onClick={() => setShowHelpOverlay(false)}>
           <div className="instructions">
             <h2>How to Play</h2>
             <p>Marble solitaire is a simple game played on a grid board:</p>
@@ -89,7 +103,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            by Rengwu
+            <img className="credits" src="./byrengwu.svg" />
           </a>
         </footer>
       </div>
@@ -156,6 +170,15 @@ export default function Home() {
           margin-top: 2rem;
           text-align: center;
           max-width: 500px;
+        }
+
+        .credits {
+          height: 30px;
+          margin: 2.5rem 0 1rem;
+          max-width: 90vw;
+
+          filter: invert(34%) sepia(39%) saturate(1910%) hue-rotate(139deg)
+            brightness(94%) contrast(101%);
         }
       `}</style>
     </>
