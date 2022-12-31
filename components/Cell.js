@@ -89,9 +89,9 @@ export default function Cell({
           left: 17%;
           width: 55%;
           height: 55%;
-          background: rgba(255, 255, 255, 0.7);
+          background: rgba(255, 255, 255, 0.3);
           border-radius: 50%;
-          filter: blur(16px);
+          filter: blur(calc(min(100vw, 680px) / 70));
         }
       `}</style>
     </>
