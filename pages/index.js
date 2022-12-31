@@ -102,10 +102,29 @@ export default function Home() {
           <div className="instructions">
             <h2>How to Play</h2>
             <p>Marble solitaire is a simple game played on a grid board:</p>
-            <img
-              src="./guide.png"
-              style={{ background: "rgb(203, 204, 176)", borderRadius: "16px" }}
-            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: "fit-content",
+              }}
+            >
+              <img
+                src="./guide.png"
+                style={{
+                  background: "rgb(203, 204, 176)",
+                  borderRadius: "16px",
+                  marginBottom: "1rem",
+                }}
+              />
+              <img
+                src="./guide2.png"
+                style={{
+                  background: "rgb(203, 204, 176)",
+                  borderRadius: "16px",
+                }}
+              />
+            </div>
             <p>
               Marbles can jump over a neighbouring marble into an empty slot and
               the marble that was jumped over is removed. You can jump
@@ -232,9 +251,14 @@ export default function Home() {
         }
 
         .instructions {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
           margin: 1.5rem;
           text-align: center;
-          max-width: 500px;
+          max-width: 600px;
+          width: 100%;
+          padding: 1.5rem;
         }
 
         .footer {
