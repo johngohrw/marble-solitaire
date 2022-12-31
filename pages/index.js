@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import {
   levels as levelsPreTransform,
@@ -10,6 +10,7 @@ import { lippyAwayCipher } from "../components/utils";
 import { GiSpeaker, GiSpeakerOff } from "react-icons/gi";
 
 const levels = transformLevels(levelsPreTransform);
+const defaultLevel = "easy01";
 
 String.prototype.replaceAt = function (index, replacement) {
   return (
@@ -69,6 +70,7 @@ export default function Home() {
             >
               How to play
             </button>
+
             <button
               className="button soundButton"
               style={{ marginLeft: "0.5rem" }}
@@ -76,11 +78,20 @@ export default function Home() {
             >
               {allowSound ? <GiSpeaker /> : <GiSpeakerOff />}
             </button>
+            <button
+              className="button"
+              style={{ marginLeft: "0.5rem", background: "#5d3a95" }}
+              onClick={() => {
+                Router.push(window.location.origin + `?l=classic01`);
+              }}
+            >
+              Classic Level
+            </button>
           </div>
 
           <div className="gameContainer">
             <MarbleGame
-              level={level || "classic01"}
+              level={level || defaultLevel}
               devMode={isDev}
               soundEffects={allowSound}
             />
@@ -131,19 +142,18 @@ export default function Home() {
       </div>
       <style jsx global>{`
         .button {
-          border: 1px solid #4b817b;
-          background: #24504c;
+          background: #347e60;
           color: white;
           padding: 0.5rem 1rem;
           border-radius: 24px;
           cursor: pointer;
+          border: 0;
         }
         .button:hover {
           background: #2672a9;
         }
         .button:disabled {
           background: gray;
-          border-color: gray;
         }
         .soundButton {
           padding: 0.1rem 0.5rem 0;

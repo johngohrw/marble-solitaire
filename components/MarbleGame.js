@@ -13,15 +13,16 @@ import {
 
 const levels = transformLevels(levelsBeforeTransform);
 const initialUndos = 2;
+const defaultLevel = levels.easy01;
 
 export default function MarbleGame({ level, devMode, soundEffects }) {
   const [restartState, setRestartState] = useState(
-    levels[level] || levels.classic01
+    levels[level] || defaultLevel
   );
   const [prevStates, setPrevStates] = useState([]);
-  const [state, setState] = useState(levels[level] || levels.classic01);
+  const [state, setState] = useState(levels[level] || defaultLevel);
   const [validMoves, setValidMoves] = useState(
-    getValidMoves(levels[level] || levels.classic01)
+    getValidMoves(levels[level] || defaultLevel)
   );
   const [hist, setHist] = useState([]);
   const [showOverlay, setShowOverlay] = useState(false);
@@ -143,7 +144,7 @@ export default function MarbleGame({ level, devMode, soundEffects }) {
             <div style={{ display: "flex", gap: "1rem" }}>
               <button
                 className="button"
-                style={{ backgroundColor: "#333", borderColor: "#777" }}
+                style={{ backgroundColor: "#5c5c5c" }}
                 onClick={restartGame}
               >
                 Start over

@@ -14,20 +14,15 @@ export const slotChars = "_ ";
 // "          ▚ "
 
 export const levels = {
-  classic: [
-    [
-      "▄██▀▀▀██▄",
-      "██▌ooo▐██",
-      "█▀▘ooo▝▀█",
-      "▌ooooooo▐",
-      "▌ooo ooo▐",
-      "▌ooooooo▐",
-      "█▄▖ooo▗▄█",
-      "██▌ooo▐██",
-      "▀██▄▄▄██▀",
-    ],
-  ],
   easy: [
+    [
+      // first move. you can't lose.
+      "######",
+      "#  o #",
+      "#oo  #",
+      "#    #",
+      "######",
+    ],
     [
       // baby steps
       "######",
@@ -45,7 +40,7 @@ export const levels = {
       "######",
     ],
     [
-      // lol
+      // entrance & exit
       "### ##",
       "#ooo #",
       "oo o #",
@@ -169,6 +164,19 @@ export const levels = {
       "o -   o - o",
       " o oo# o o ",
       "# # o   # #",
+    ],
+  ],
+  classic: [
+    [
+      "▄██▀▀▀██▄",
+      "██▌ooo▐██",
+      "█▀▘ooo▝▀█",
+      "▌ooooooo▐",
+      "▌ooo ooo▐",
+      "▌ooooooo▐",
+      "█▄▖ooo▗▄█",
+      "██▌ooo▐██",
+      "▀██▄▄▄██▀",
     ],
   ],
 };
