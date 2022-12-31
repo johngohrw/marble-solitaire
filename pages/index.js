@@ -138,6 +138,13 @@ export default function Home() {
           >
             <img className="credits" src="./byrengwu.svg" />
           </a>
+          <a
+            href="https://github.com/johngohrw/marble-solitaire"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="repo" src="./github.png" />
+          </a>
         </footer>
       </div>
       <style jsx global>{`
@@ -230,6 +237,11 @@ export default function Home() {
           max-width: 500px;
         }
 
+        .footer {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
         .credits {
           height: 30px;
           margin: 2.5rem 0 1rem;
@@ -243,7 +255,16 @@ export default function Home() {
             brightness(91%) contrast(91%);
         }
 
-        .footer {
+        .repo {
+          height: 30px;
+          margin: 0 0 2rem;
+          max-width: 90vw;
+          filter: invert(34%) sepia(39%) saturate(1910%) hue-rotate(139deg)
+            brightness(94%) contrast(101%);
+        }
+        .repo:hover {
+          filter: invert(53%) sepia(70%) saturate(433%) hue-rotate(162deg)
+            brightness(91%) contrast(91%);
         }
       `}</style>
     </>
