@@ -253,7 +253,7 @@ export default function MarbleGame({ level, devMode, soundEffects }) {
               style={{ marginLeft: "0.5rem" }}
               className="button"
               onClick={undo}
-              disabled={undoCredits <= 0}
+              disabled={undoCredits <= 0 || prevStates.length <= 0}
             >
               Undo (x{undoCredits})
             </button>
