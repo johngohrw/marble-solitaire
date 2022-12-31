@@ -141,6 +141,10 @@ export default function Home() {
         .button:hover {
           background: #2672a9;
         }
+        .button:disabled {
+          background: gray;
+          border-color: gray;
+        }
         .soundButton {
           padding: 0.1rem 0.5rem 0;
         }

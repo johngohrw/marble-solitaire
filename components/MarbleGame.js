@@ -12,6 +12,7 @@ import {
 } from "./utils";
 
 const levels = transformLevels(levelsBeforeTransform);
+const initialUndos = 2;
 
 export default function MarbleGame({ level, devMode, soundEffects }) {
   const [restartState, setRestartState] = useState(
@@ -25,6 +26,7 @@ export default function MarbleGame({ level, devMode, soundEffects }) {
   const [hist, setHist] = useState([]);
   const [showOverlay, setShowOverlay] = useState(false);
   const [winState, setWinState] = useState(false);
+  const [undoCredits, setUndoCredits] = useState(initialUndos);
 
   const [playClick] = useSound("./click-perc.wav", {
     volume: soundEffects ? 0.25 : 0,
@@ -47,6 +49,7 @@ export default function MarbleGame({ level, devMode, soundEffects }) {
     setRestartState(levels[level]);
     setState(levels[level]);
     setPrevStates([]);
+    setUndoCredits(initialUndos);
   }, [level]);
 
   // get valid moves whenever state changes
@@ -98,6 +101,7 @@ export default function MarbleGame({ level, devMode, soundEffects }) {
       setState(newState);
       setPrevStates(prevStates.slice(0, -1));
       playUndo();
+      setUndoCredits(undoCredits - 1);
     } else {
       alert("i can't undo nothin");
     }
@@ -107,6 +111,8 @@ export default function MarbleGame({ level, devMode, soundEffects }) {
     setState(restartState);
     setShowOverlay(false);
     playShuffle();
+    setPrevStates([]);
+    setUndoCredits(initialUndos);
   }
 
   function endGame(win) {
@@ -243,15 +249,14 @@ export default function MarbleGame({ level, devMode, soundEffects }) {
             <button className="button" onClick={restartGame}>
               Restart
             </button>{" "}
-            {devMode && (
-              <button
-                style={{ marginLeft: "0.5rem" }}
-                className="button"
-                onClick={undo}
-              >
-                Undo
-              </button>
-            )}
+            <button
+              style={{ marginLeft: "0.5rem" }}
+              className="button"
+              onClick={undo}
+              disabled={undoCredits <= 0}
+            >
+              Undo (x{undoCredits})
+            </button>
           </div>
         </div>
       </div>
