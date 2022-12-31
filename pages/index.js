@@ -103,7 +103,7 @@ export default function Home() {
             <h2>How to Play</h2>
             <p>Marble solitaire is a simple game played on a grid board:</p>
             <img
-              src="./demo.png"
+              src="./guide.png"
               style={{ background: "rgb(203, 204, 176)", borderRadius: "16px" }}
             />
             <p>
