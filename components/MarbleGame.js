@@ -89,8 +89,8 @@ export default function MarbleGame({ level, devMode, soundEffects }) {
       .map((o) => parseInt(o));
     const between = [average(from[0], to[0]), average(from[1], to[1])];
     const newState = JSON.parse(JSON.stringify(state));
-    newState[from[1]] = newState[from[1]].replaceAt(from[0], "_"); // from becomes empty
-    newState[between[1]] = newState[between[1]].replaceAt(between[0], "_"); // inbetween becomes empty
+    newState[from[1]] = newState[from[1]].replaceAt(from[0], " "); // from becomes empty
+    newState[between[1]] = newState[between[1]].replaceAt(between[0], " "); // inbetween becomes empty
     newState[to[1]] = newState[to[1]].replaceAt(to[0], "o"); // to becomes a marble
     setState(newState);
     playClick();
@@ -258,6 +258,11 @@ export default function MarbleGame({ level, devMode, soundEffects }) {
             >
               Undo (x{undoCredits})
             </button>
+            {devMode && (
+              <button onClick={() => console.log(JSON.stringify(state))}>
+                copy state
+              </button>
+            )}
           </div>
         </div>
       </div>

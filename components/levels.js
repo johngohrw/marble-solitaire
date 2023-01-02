@@ -175,6 +175,18 @@ export const levels = {
       "   ooo oo",
       " oo   oo ",
     ],
+    [
+      // basketball
+      " o  oo  o",
+      "oooo  o o",
+      "o o o    ",
+      "   - oo-o",
+      " - oo-   ",
+      " oo o oo ",
+      "o o-o- oo",
+      "ooo- -o o",
+      " ---#----"
+    ],
   ],
   classic: [
     [
