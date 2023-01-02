@@ -154,18 +154,6 @@ export const levels = {
       "oo o    -",
     ],
     [
-      // RAILROAD EXPRESS
-      "#-#-#-#-#-#",
-      " o      oo ",
-      "-  o#o oo o",
-      " o o o    o",
-      "  o o o o  ",
-      " o #ooo# o ",
-      "o -   o - o",
-      " o oo# o o ",
-      "# # o   # #",
-    ],
-    [
       // <3
       "   o     ",
       "oo#  o oo",
@@ -185,7 +173,19 @@ export const levels = {
       " oo o oo ",
       "o o-o- oo",
       "ooo- -o o",
-      " ---#----"
+      " ---#----",
+    ],
+    [
+      // RAILROAD EXPRESS
+      "#-#-#-#-#-#",
+      " o      oo ",
+      "-  o#o oo o",
+      " o o o    o",
+      "  o o o o  ",
+      " o #ooo# o ",
+      "o -   o - o",
+      " o oo# o o ",
+      "# # o   # #",
     ],
   ],
   classic: [
