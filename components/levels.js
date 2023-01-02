@@ -165,6 +165,16 @@ export const levels = {
       " o oo# o o ",
       "# # o   # #",
     ],
+    [
+      // <3
+      "   o     ",
+      "oo#  o oo",
+      "ooo o oo ",
+      " oo o    ",
+      " o     oo",
+      "   ooo oo",
+      " oo   oo ",
+    ],
   ],
   classic: [
     [
