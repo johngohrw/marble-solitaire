@@ -112,8 +112,10 @@ export default function MarbleGame({ level, devMode, soundEffects }) {
     setState(restartState);
     setShowOverlay(false);
     playShuffle();
-    setPrevStates([]);
-    setUndoCredits(initialUndos);
+    if (!devMode) {
+      setUndoCredits(initialUndos);
+      setPrevStates([]);
+    }
   }
 
   function endGame(win) {
@@ -259,9 +261,19 @@ export default function MarbleGame({ level, devMode, soundEffects }) {
               Undo (x{undoCredits})
             </button>
             {devMode && (
-              <button onClick={() => console.log(JSON.stringify(state))}>
-                copy state
-              </button>
+              <>
+                <button
+                  style={{ marginLeft: "0.5rem" }}
+                  className="button"
+                  onClick={undo}
+                >
+                  Infinite Undo
+                </button>
+
+                <button onClick={() => console.log(JSON.stringify(state))}>
+                  copy state
+                </button>
+              </>
             )}
           </div>
         </div>

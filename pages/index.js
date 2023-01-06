@@ -38,7 +38,7 @@ export default function Home() {
       setLevel(level);
     }
     if (devMode && lip) {
-      setIsDev(lippyAwayCipher(lip, devMode) === "ztr");
+      setIsDev(lippyAwayCipher(lip, devMode) === "aus");
     }
   }, [router.asPath]);
 
