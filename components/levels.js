@@ -90,11 +90,6 @@ export const levels = {
     ],
     [
       // crosshair
-      " o   oo oo",
-      " o   o ▚ ▞",
-      "o o o oo  ",
-      " o   o ▞o▚",
-      " o   o   -",
     ],
     [
       // fishbone
