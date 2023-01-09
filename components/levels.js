@@ -70,7 +70,6 @@ export const levels = {
       "ooo o#-",
       " # # ##",
     ],
-
     [
       // checkerboard
       "oo  oo",
@@ -145,6 +144,14 @@ export const levels = {
       "oo#o o ",
       "o  oo#o",
       " ooo -o",
+    ],
+    [
+      // medium08
+      "o#o o",
+      "o# oo",
+      " #o# ",
+      "ooo#o",
+      " oo# ",
     ],
   ],
   hard: [
@@ -243,6 +250,16 @@ export const levels = {
       "  # o#o ",
       "o#oo o#o",
       " o ooo  ",
+    ],
+    [
+      // parthenon
+      " o o ooo ",
+      "o#o# #o#o",
+      " o  o  oo",
+      "oooo oo#o",
+      "oooo oo  ",
+      "o#o#o#o#o",
+      " ooo o o ",
     ],
   ],
 };
