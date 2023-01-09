@@ -1,18 +1,16 @@
 import copy
 import random
+import json
 
 inputPuzzle = [
-    "         ",
-    "         ",
-    " ########",
-    "         ",
-    "    o    ",
-    "         ",
-    "######## ",
-    "         ",
-    "         ",
+    "  # -  ",
+    "#     -",
+    "   #   ",
+    "  #    ",
+    "     # ",
+    "     -o",
 ]
-stepsToExtrapolate = 100
+stepsToExtrapolate = 19
 debugMode = True
 
 def getCoordsFromIndex(index, rows, cols):
@@ -57,7 +55,6 @@ def getValidMarble(state):
     for i in range(totalCellCount):
         unvisited.append(i)
 
-    
     while len(unvisited) > 0:
         # choose random cell from unvisited array to visit
         k = random.randint(0, len(unvisited) - 1)
@@ -143,3 +140,13 @@ if __name__ == "__main__":
     
     file.close()
     print("extrapolation saved to file (generated.txt)")
+
+    file = open("history.json", "w")
+    historyDict = {
+    "history": [],
+    }
+    historyDict["history"] = hist 
+    JSONstring = json.dumps(historyDict)
+    file.write(JSONstring)
+    file.close()
+    print("history saved to file (history.json)")

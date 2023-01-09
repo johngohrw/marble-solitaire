@@ -119,6 +119,8 @@ export const levels = {
       "#ooo o",
       "  o o #",
     ],
+
+    [" o# -o ", "#oo o -", "   #ooo", "oo#o o ", "o  oo#o", " ooo -o"],
   ],
   hard: [
     [
