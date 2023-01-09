@@ -44,7 +44,7 @@ export default function MarbleGame({
   const [playLose] = useSound("./toddlercry.wav", {
     volume: soundEffects ? 0.11 : 0,
   });
-  const [playYay] = useSound("./yay.wav", {
+  const [playWin] = useSound("./tada.mp3", {
     volume: soundEffects ? 0.55 : 0,
   });
   const [playUndo] = useSound("./swoosh.mp3", {
@@ -130,7 +130,7 @@ export default function MarbleGame({
   function endGame(win) {
     if (win) {
       setWinState(true);
-      playYay();
+      playWin();
       const newProgress = getUpdatedLevelCompletionProgress(
         progressString,
         level
