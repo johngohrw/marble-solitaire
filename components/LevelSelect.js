@@ -21,13 +21,14 @@ export function LevelSelect({ closeOverlay, levelProgress }) {
         <div className="mainLevelList">
           {Object.entries(levels).map(([categoryName, _levels]) => {
             return (
-              <div className="category">
+              <div className="category" key={categoryName}>
                 <div className="categoryTitle">{categoryName}</div>
                 <div className="levelList">
                   {Object.entries(_levels).map(([level, state]) => {
                     const levelID = getLevelID(categoryName, parseInt(level));
                     return (
                       <LevelItem
+                        key={levelID}
                         onClick={() => {
                           router.push(window.location.origin + `?l=` + levelID);
                           if (closeOverlay) {
@@ -95,8 +96,8 @@ function LevelItem({ state, name, completed, onClick, ...rest }) {
         <div className="tag">{name}</div>
         {completed && <div className="complete">complete</div>}
         <div className="state">
-          {state.map((row) => (
-            <div className="row">
+          {state.map((row, i) => (
+            <div className="row" keys={i}>
               {row.split("").map((char) => getCell(char))}
             </div>
           ))}
