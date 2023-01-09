@@ -8,9 +8,12 @@ import {
 import MarbleGame from "../components/MarbleGame";
 import { lippyAwayCipher } from "../components/utils";
 import { GiSpeaker, GiSpeakerOff } from "react-icons/gi";
+import { Overlay } from "../components/Overlay";
+import { LevelSelect } from "../components/LevelSelect";
 
 const levels = transformLevels(levelsPreTransform);
 const defaultLevel = "easy01";
+let _progress;
 
 String.prototype.replaceAt = function (index, replacement) {
   return (
@@ -25,6 +28,8 @@ export default function Home() {
   const [isDev, setIsDev] = useState(false);
   const [allowSound, setAllowSound] = useState(true);
   const [showHelpOverlay, setShowHelpOverlay] = useState(false);
+  const [showLevelSelect, setShowLevelSelect] = useState(false);
+  const [levelProgress, setLevelProgress] = useState(null);
   const router = useRouter();
 
   // when router changes, set level
@@ -40,6 +45,9 @@ export default function Home() {
     if (devMode && lip) {
       setIsDev(lippyAwayCipher(lip, devMode) === "aus");
     }
+
+    // update progress everytime route changes
+    updateProgress();
   }, [router.asPath]);
 
   useEffect(() => {
@@ -50,6 +58,19 @@ export default function Home() {
       localStorage.setItem("alreadyVisited", true);
     }
   }, []);
+
+  function updateProgress() {
+    _progress = localStorage.getItem("progress");
+    if (!_progress) {
+      _progress = Object.keys(levels).reduce((acc, curr) => {
+        acc[curr] = false;
+        return acc;
+      }, {});
+      localStorage.setItem("progress", JSON.stringify(_progress));
+    } else {
+      setLevelProgress(JSON.parse(_progress));
+    }
+  }
 
   return (
     <>
@@ -62,31 +83,34 @@ export default function Home() {
 
         <main className="container">
           <img className="logo" src="./logo.svg" />
-          <div style={{ marginBottom: "0.5rem", display: "flex" }}>
+          <div className="topButtons">
             <button
-              className="button"
-              style={{ marginLeft: "0.5rem" }}
-              onClick={() => setShowHelpOverlay(true)}
-            >
-              How to play
-            </button>
-
-            <button
-              className="button soundButton"
-              style={{ marginLeft: "0.5rem" }}
-              onClick={() => setAllowSound(!allowSound)}
-            >
-              {allowSound ? <GiSpeaker /> : <GiSpeakerOff />}
-            </button>
-            <button
-              className="button"
+              className="button big level"
               style={{ marginLeft: "0.5rem", background: "#5d3a95" }}
               onClick={() => {
-                Router.push(window.location.origin + `?l=classic01`);
+                setShowLevelSelect(true);
               }}
             >
-              Classic Level
+              <span className="levelLabel">Level:</span>
+              <span className="levelValue">{level}</span>
             </button>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <button
+                className="button"
+                style={{ marginLeft: "0.5rem" }}
+                onClick={() => setShowHelpOverlay(true)}
+              >
+                How to play
+              </button>
+
+              <button
+                className="button soundButton"
+                style={{ marginLeft: "0.5rem", padding: "0.2rem" }}
+                onClick={() => setAllowSound(!allowSound)}
+              >
+                {allowSound ? <GiSpeaker /> : <GiSpeakerOff />}
+              </button>
+            </div>
           </div>
 
           <div className="gameContainer">
@@ -94,11 +118,26 @@ export default function Home() {
               level={level || defaultLevel}
               devMode={isDev}
               soundEffects={allowSound}
+              setLevelProgress={setLevelProgress}
             />
           </div>
         </main>
 
-        <div className="overlay" onClick={() => setShowHelpOverlay(false)}>
+        <Overlay
+          visible={showLevelSelect}
+          onTriggerClose={() => setShowLevelSelect(false)}
+        >
+          <LevelSelect
+            closeOverlay={() => setShowLevelSelect(false)}
+            levelProgress={levelProgress}
+          />
+        </Overlay>
+
+        <Overlay
+          visible={showHelpOverlay}
+          onClick={() => setShowHelpOverlay(false)}
+          onTriggerClose={() => setShowHelpOverlay(true)}
+        >
           <div className="instructions">
             <h2>How to Play</h2>
             <p>Marble solitaire is a simple game played on a grid board:</p>
@@ -147,7 +186,7 @@ export default function Home() {
               Got it
             </button>
           </div>
-        </div>
+        </Overlay>
 
         <footer className="footer">
           <a
@@ -167,6 +206,14 @@ export default function Home() {
         </footer>
       </div>
       <style jsx global>{`
+        body {
+          overflow-y: ${showLevelSelect || showHelpOverlay
+            ? "hidden"
+            : "initial"};
+          padding-right: ${showLevelSelect || showHelpOverlay
+            ? "16px"
+            : "initial"};
+        }
         .button {
           background: #347e60;
           color: white;
@@ -174,12 +221,27 @@ export default function Home() {
           border-radius: 24px;
           cursor: pointer;
           border: 0;
+          font-size: 14px;
         }
         .button:hover {
           background: #2672a9;
         }
         .button:disabled {
           background: gray;
+          color: #ccc;
+          cursor: not-allowed;
+        }
+        .button.big {
+          padding: 0.75rem 1.3rem;
+          border-radius: 8px;
+          font-size: 16px;
+          font-weight: 500;
+        }
+        @media (max-width: 500px) {
+          .button.big {
+            padding: 0.5rem 1rem;
+            font-size: 14px;
+          }
         }
         .soundButton {
           padding: 0.1rem 0.5rem 0;
@@ -219,35 +281,25 @@ export default function Home() {
           filter: invert(34%) sepia(39%) saturate(1910%) hue-rotate(139deg)
             brightness(94%) contrast(101%);
         }
-
+        .topButtons {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          margin-bottom: 1rem;
+        }
+        .level .levelLabel {
+          opacity: 0.6;
+          font-weight: 500;
+          margin-right: 0.2rem;
+        }
+        .level .levelValue {
+          opacity: 0.9;
+          font-weight: 600;
+        }
         .gameContainer {
           display: flex;
           width: 100%;
           max-width: min(100vw, 100%);
-        }
-
-        .overlay {
-          position: absolute;
-          background: rgba(0, 0, 0, 0.5);
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          z-index: 10;
-
-          transition-duration: 500ms;
-
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-
-          color: white;
-          backdrop-filter: blur(10px);
-
-          opacity: ${showHelpOverlay ? 1 : 0};
-          user-select: none;
-          pointer-events: ${showHelpOverlay ? "auto" : "none"};
         }
 
         .instructions {

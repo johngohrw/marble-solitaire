@@ -14,8 +14,14 @@ import {
 const levels = transformLevels(levelsBeforeTransform);
 const initialUndos = 2;
 const defaultLevel = levels.easy01;
+let progressString;
 
-export default function MarbleGame({ level, devMode, soundEffects }) {
+export default function MarbleGame({
+  level,
+  devMode,
+  soundEffects,
+  setLevelProgress,
+}) {
   const [restartState, setRestartState] = useState(
     levels[level] || defaultLevel
   );
@@ -29,17 +35,17 @@ export default function MarbleGame({ level, devMode, soundEffects }) {
   const [winState, setWinState] = useState(false);
   const [undoCredits, setUndoCredits] = useState(initialUndos);
 
-  const [playClick] = useSound("./click-perc.wav", {
-    volume: soundEffects ? 0.25 : 0,
+  const [playClick] = useSound("./metronome-perc.wav", {
+    volume: soundEffects ? 0.45 : 0,
   });
   const [playShuffle] = useSound("./marbleshuffle.mp3", {
     volume: soundEffects ? 0.35 : 0,
   });
   const [playLose] = useSound("./toddlercry.wav", {
-    volume: soundEffects ? 0.15 : 0,
+    volume: soundEffects ? 0.11 : 0,
   });
-  const [playTada] = useSound("./tada.mp3", {
-    volume: soundEffects ? 0.25 : 0,
+  const [playYay] = useSound("./yay.wav", {
+    volume: soundEffects ? 0.55 : 0,
   });
   const [playUndo] = useSound("./swoosh.mp3", {
     volume: soundEffects ? 0.75 : 0,
@@ -124,12 +130,29 @@ export default function MarbleGame({ level, devMode, soundEffects }) {
   function endGame(win) {
     if (win) {
       setWinState(true);
-      playTada();
+      playYay();
+      const newProgress = getUpdatedLevelCompletionProgress(
+        progressString,
+        level
+      );
+      localStorage?.setItem("progress", JSON.stringify(newProgress));
+      setLevelProgress(newProgress);
     } else {
       setWinState(false);
       playLose();
     }
     setShowOverlay(true);
+  }
+
+  // get latest progress from localStorage
+  useEffect(() => {
+    progressString = localStorage.getItem("progress");
+  }, [level]);
+
+  function getUpdatedLevelCompletionProgress(progString, levelID) {
+    const progress = JSON.parse(progString);
+    progress[levelID] = true;
+    return progress;
   }
 
   return (
@@ -236,48 +259,34 @@ export default function MarbleGame({ level, devMode, soundEffects }) {
             ))}
           </div>
           <div className="gameOptions">
-            <div
-              className="levelSelection"
-              style={{ marginRight: "1rem", display: "flex" }}
-            >
-              <span style={{ marginRight: "0.2rem" }}>Level:</span>
-              <select
-                value={level}
-                onChange={(e) =>
-                  Router.push(window.location.origin + `?l=` + e.target.value)
-                }
+            <div style={{ flexShrink: "0" }}>
+              <button className="button big" onClick={restartGame}>
+                Restart
+              </button>{" "}
+              <button
+                style={{ marginLeft: "0.5rem" }}
+                className="button big"
+                onClick={undo}
+                disabled={undoCredits <= 0 || prevStates.length <= 0}
               >
-                {Object.keys(levels).map((level) => (
-                  <option key={level}>{level}</option>
-                ))}
-              </select>
-            </div>
-            <button className="button" onClick={restartGame}>
-              Restart
-            </button>{" "}
-            <button
-              style={{ marginLeft: "0.5rem" }}
-              className="button"
-              onClick={undo}
-              disabled={undoCredits <= 0 || prevStates.length <= 0}
-            >
-              Undo (x{undoCredits})
-            </button>
-            {devMode && (
-              <>
-                <button
-                  style={{ marginLeft: "0.5rem" }}
-                  className="button"
-                  onClick={undo}
-                >
-                  Infinite Undo
-                </button>
+                Undo (x{undoCredits})
+              </button>
+              {devMode && (
+                <>
+                  <button
+                    style={{ marginLeft: "0.5rem" }}
+                    className="button"
+                    onClick={undo}
+                  >
+                    Infinite Undo
+                  </button>
 
-                <button onClick={() => console.log(JSON.stringify(state))}>
-                  copy state
-                </button>
-              </>
-            )}
+                  <button onClick={() => console.log(JSON.stringify(state))}>
+                    copy state
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -298,7 +307,7 @@ export default function MarbleGame({ level, devMode, soundEffects }) {
         .gameContainer {
           width: 100%;
           position: relative;
-          padding: 1rem;
+          padding: 0.2rem;
         }
         .game {
           position: relative;
@@ -374,7 +383,8 @@ export default function MarbleGame({ level, devMode, soundEffects }) {
           display: flex;
           flex-direction: row;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-end;
+          width: 100%;
         }
       `}</style>
     </>

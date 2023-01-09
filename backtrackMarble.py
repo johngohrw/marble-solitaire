@@ -10,7 +10,7 @@ inputPuzzle = [
     "     # ",
     "     -o",
 ]
-stepsToExtrapolate = 19
+stepsToExtrapolate = 100
 debugMode = True
 
 def getCoordsFromIndex(index, rows, cols):

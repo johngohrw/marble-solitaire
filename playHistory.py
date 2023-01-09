@@ -1,10 +1,7 @@
 import json
 import time
 import os
- 
 
- 
-# Clearing the Screen
 f = open('history.json')
 data = json.load(f)
 

@@ -14,6 +14,19 @@ export const slotChars = "_ ";
 // "          ▚ "
 
 export const levels = {
+  classic: [
+    [
+      "▄██▀▀▀██▄",
+      "██▌ooo▐██",
+      "█▀▘ooo▝▀█",
+      "▌ooooooo▐",
+      "▌ooo ooo▐",
+      "▌ooooooo▐",
+      "█▄▖ooo▗▄█",
+      "██▌ooo▐██",
+      "▀██▄▄▄██▀",
+    ],
+  ],
   easy: [
     [
       // first move. you can't lose.
@@ -119,8 +132,15 @@ export const levels = {
       "#ooo o",
       "  o o #",
     ],
-
-    [" o# -o ", "#oo o -", "   #ooo", "oo#o o ", "o  oo#o", " ooo -o"],
+    [
+      // medium07
+      " o# -o ",
+      "#oo o -",
+      "   #ooo",
+      "oo#o o ",
+      "o  oo#o",
+      " ooo -o",
+    ],
   ],
   hard: [
     [
@@ -209,27 +229,18 @@ export const levels = {
       "oo o o oo",
     ],
   ],
-  classic: [
-    [
-      "▄██▀▀▀██▄",
-      "██▌ooo▐██",
-      "█▀▘ooo▝▀█",
-      "▌ooooooo▐",
-      "▌ooo ooo▐",
-      "▌ooooooo▐",
-      "█▄▖ooo▗▄█",
-      "██▌ooo▐██",
-      "▀██▄▄▄██▀",
-    ],
-  ],
 };
+
+export function getLevelID(category, index) {
+  return `${category}${(index + 1).toString().padStart(2, 0)}`;
+}
 
 export function transformLevels(levelObj) {
   const categoryList = Object.keys(levelObj);
   let levels = [];
   categoryList.forEach((category) => {
     levelObj[category].forEach((map, index) => {
-      const levelID = `${category}${(index + 1).toString().padStart(2, 0)}`;
+      const levelID = getLevelID(category, index);
       levels[levelID] = map;
     });
   });
