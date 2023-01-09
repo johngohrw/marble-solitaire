@@ -92,7 +92,7 @@ export default function Home() {
               }}
             >
               <span className="levelLabel">Level:</span>
-              <span className="levelValue">{level}</span>
+              <span className="levelValue">{level || defaultLevel}</span>
             </button>
             <div style={{ display: "flex", alignItems: "center" }}>
               <button
