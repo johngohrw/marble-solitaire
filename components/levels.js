@@ -194,6 +194,18 @@ export const levels = {
       "oo  oo oo",
       "o o ooo  ",
     ],
+    [
+      // inorganic
+      " o o o oo",
+      "oo o o oo",
+      " ########",
+      "o oo oooo",
+      "ooooooooo",
+      "oooo oooo",
+      "########o",
+      "oo o o oo",
+      "oo o o oo",
+    ],
   ],
   classic: [
     [
