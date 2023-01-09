@@ -233,6 +233,17 @@ export const levels = {
       "oo o o oo",
       "oo o o oo",
     ],
+    [
+      // colliseum
+      "  o oo  ",
+      "o# oo #o",
+      "o #o #oo",
+      "oo  o o ",
+      "o  ooo o",
+      "  # o#o ",
+      "o#oo o#o",
+      " o ooo  ",
+    ],
   ],
 };
 
