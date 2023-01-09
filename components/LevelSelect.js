@@ -63,7 +63,7 @@ export function LevelSelect({ closeOverlay, levelProgress }) {
           font-weight: 600;
           display: flex;
           justify-content: center;
-          margin-bottom: 1rem;
+          margin-bottom: 1.5rem;
         }
         .mainLevelList {
           display: flex;
@@ -76,7 +76,7 @@ export function LevelSelect({ closeOverlay, levelProgress }) {
           font-size: 1.5rem;
           font-weight: 700;
           text-transform: capitalize;
-          margin-bottom: 0.4rem;
+          margin: 1rem 0 1rem;
         }
         .levelList {
           display: flex;
@@ -97,8 +97,8 @@ function LevelItem({ state, name, completed, onClick, ...rest }) {
         {completed && <div className="complete">complete</div>}
         <div className="state">
           {state.map((row, i) => (
-            <div className="row" keys={i}>
-              {row.split("").map((char) => getCell(char))}
+            <div className="row" key={`${row}${i}`}>
+              {row.split("").map((char, j) => getCell(char, j))}
             </div>
           ))}
         </div>
@@ -177,18 +177,18 @@ function LevelItem({ state, name, completed, onClick, ...rest }) {
   );
 }
 
-const getCell = (char) => {
+const getCell = (char, key) => {
   if (walls.includes(char)) {
-    return <div className="minicell wall" />;
+    return <div key={`${key}${char}`} className="minicell wall" />;
   }
   if (emptyChars.includes(char)) {
-    return <div className="minicell empty" />;
+    return <div key={`${key}${char}`} className="minicell empty" />;
   }
   if (slotChars.includes(char)) {
-    return <div className="minicell slot" />;
+    return <div key={`${key}${char}`} className="minicell slot" />;
   }
   if (char === "o") {
-    return <div className="minicell marble" />;
+    return <div key={`${key}${char}`} className="minicell marble" />;
   }
-  return <div className="minicell" />;
+  return <div key={`${key}${char}`} className="minicell" />;
 };
