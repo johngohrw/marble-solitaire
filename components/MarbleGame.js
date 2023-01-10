@@ -55,7 +55,10 @@ export default function MarbleGame({
   useEffect(() => {
     setRestartState(levels[level]);
     setState(levels[level]);
-    restartGame(levels[level]);
+    setPrevStates([]);
+    setUndoCredits(initialUndos);
+    setShowOverlay(false); // hide overlay
+    playShuffle();
   }, [level]);
 
   // get valid moves whenever state changes
@@ -116,8 +119,8 @@ export default function MarbleGame({
     }
   }
 
-  function restartGame(state = null) {
-    setState(state || restartState);
+  function restartGame() {
+    setState(restartState);
     setShowOverlay(false);
     playShuffle();
     if (!devMode) {
@@ -183,7 +186,6 @@ export default function MarbleGame({
                   Router.push(
                     window.location.origin + `?l=` + getNextLevel(level, levels)
                   );
-                  restartGame();
                 }}
               >
                 Next level

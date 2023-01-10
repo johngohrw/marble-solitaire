@@ -168,7 +168,7 @@ function LevelItem({ state, name, completed, onClick, ...rest }) {
             background: #333;
           }
           .minicell.marble {
-            background: green;
+            background: #076a60;
             border-radius: 50%;
           }
         `}
