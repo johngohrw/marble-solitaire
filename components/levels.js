@@ -8,11 +8,6 @@ export const slotChars = "_ ";
 //   = empty marble space (slot)
 // - = nothing (no slot)
 
-// "       ▗▄▄  ",
-// "       ▐▚   ",
-// "       ▐ ▚  ",
-// "          ▚ "
-
 export const levels = {
   classic: [
     [
@@ -321,6 +316,16 @@ export const levels = {
       " # o# o ",
       "  #o ooo",
       " o o ooo",
+    ],
+    [
+      // try to end it here
+      "o ooooo o",
+      "oo o o o ",
+      "oo  ▗▄▄ o",
+      "oooo▐▚ o ",
+      "oo  ▐ ▚oo",
+      "oooo oo▚o",
+      "   oo    ",
     ],
   ],
 };
