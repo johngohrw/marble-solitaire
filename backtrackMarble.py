@@ -3,15 +3,11 @@ import random
 import json
 
 inputPuzzle = [
-   " #       ",
-   " #       ",
-   " # #     ",
-   "   #     ",
-   "   #o#   ",
-   "     #   ",
-   "     # # ",
-   "       # ",
-   "       # ",
+   "     ",
+   "     ",
+   "  o  ",
+   "     ",
+   "     ",
 ]
 stepsToExtrapolate = 35
 debugMode = True

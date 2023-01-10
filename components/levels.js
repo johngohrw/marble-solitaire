@@ -293,6 +293,14 @@ export const levels = {
       " ooooo #o",
       "oo o   #o",
     ],
+    [
+      // looks can be deceiving
+      "oo oo",
+      "ooooo",
+      "oo oo",
+      "ooooo",
+      "oo oo",
+    ],
   ],
 };
 
