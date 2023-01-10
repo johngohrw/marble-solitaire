@@ -16,7 +16,7 @@ export function LevelSelect({ closeOverlay, levelProgress }) {
 
   return (
     <>
-      <div className="container">
+      <div className="container" onClick={closeOverlay}>
         <div className="title">Level Select</div>
         <div className="mainLevelList">
           {Object.entries(levels).map(([categoryName, _levels]) => {
