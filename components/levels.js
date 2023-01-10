@@ -115,11 +115,11 @@ export const levels = {
     ],
     [
       // fishbone
-      " o         ",
-      "oo o    # o",
-      "o #ooooooo ",
-      " ooo o   o ",
-      "  o o  o   ",
+      " o  o o  ",
+      "oo oo o #",
+      "o #o o o ",
+      " ooo o  o",
+      "  o o  o ",
     ],
     [
       "-    - -",
@@ -177,6 +177,14 @@ export const levels = {
       "oo o o ",
       "-oooo -",
       "-- o --",
+    ],
+    [
+      // looks can be deceiving
+      "oo oo",
+      "ooooo",
+      "oo oo",
+      "ooooo",
+      "oo oo",
     ],
   ],
   hard: [
@@ -299,12 +307,14 @@ export const levels = {
       "oo o   #o",
     ],
     [
-      // looks can be deceiving
-      "oo oo",
-      "ooooo",
-      "oo oo",
-      "ooooo",
-      "oo oo",
+      // pure random
+      "-o o o ",
+      " o oooo",
+      "o #oo o",
+      "ooooooo",
+      "ooooo# ",
+      " o oooo",
+      "-oo oo ",
     ],
     [
       // roshan's pit
