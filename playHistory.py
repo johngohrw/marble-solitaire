@@ -11,5 +11,5 @@ while True:
         os.system('cls')
         for row in state:
             print(row)
-        time.sleep(0.9)
+        time.sleep(0.5)
     time.sleep(2)

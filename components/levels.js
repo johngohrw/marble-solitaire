@@ -281,6 +281,18 @@ export const levels = {
       "o#o#o#o#o",
       " ooo o o ",
     ],
+    [
+      // lanes
+      "o#  o    ",
+      "o#   o  o",
+      " # #ooo o",
+      " oo#o o  ",
+      "ooo#o#   ",
+      "oo oo# oo",
+      "o  oo# # ",
+      " ooooo #o",
+      "oo o   #o",
+    ],
   ],
 };
 

@@ -3,15 +3,17 @@ import random
 import json
 
 inputPuzzle = [
-   "       ",
-   " -   - ",
-   "  - o  ",
-   "   -   ",
-   "    -  ",
-   " -   - ",
-   "       ",
+   " #       ",
+   " #       ",
+   " # #     ",
+   "   #     ",
+   "   #o#   ",
+   "     #   ",
+   "     # # ",
+   "       # ",
+   "       # ",
 ]
-stepsToExtrapolate = 15
+stepsToExtrapolate = 35
 debugMode = True
 
 def getCoordsFromIndex(index, rows, cols):
