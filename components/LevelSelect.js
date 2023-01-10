@@ -4,10 +4,8 @@ import {
   getLevelID,
   levels as levelsBeforeTransform,
   slotChars,
-  transformLevels,
   walls,
 } from "./levels";
-import { useEffect, useState } from "react";
 
 const levels = levelsBeforeTransform;
 
@@ -178,17 +176,15 @@ function LevelItem({ state, name, completed, onClick, ...rest }) {
 }
 
 const getCell = (char, key) => {
+  let className = "";
   if (walls.includes(char)) {
-    return <div key={`${key}${char}`} className="minicell wall" />;
+    className = "wall";
+  } else if (emptyChars.includes(char)) {
+    className = "empty";
+  } else if (slotChars.includes(char)) {
+    className = "slot";
+  } else if (char === "o") {
+    className = "marble";
   }
-  if (emptyChars.includes(char)) {
-    return <div key={`${key}${char}`} className="minicell empty" />;
-  }
-  if (slotChars.includes(char)) {
-    return <div key={`${key}${char}`} className="minicell slot" />;
-  }
-  if (char === "o") {
-    return <div key={`${key}${char}`} className="minicell marble" />;
-  }
-  return <div key={`${key}${char}`} className="minicell" />;
+  return <div key={`${key}${char}`} className={`minicell ${className}`} />;
 };

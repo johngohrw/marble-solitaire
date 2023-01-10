@@ -79,13 +79,23 @@ export const levels = {
       "##  oo",
       "##  oo",
     ],
+    [
+      // dota
+      "  o oo ",
+      "o# oo# ",
+      " o#oo o",
+      "oo # o ",
+      "    #o ",
+      " #o  # ",
+      "  o    ",
+    ],
   ],
   medium: [
     [
       "---   o#",
       "## #oo #",
-      " o #   ",
-      "o#o oo ",
+      " o #   -",
+      "o#o oo -",
       "ooo o   ",
       "  #o oo ",
       "--#o oo ",
@@ -121,7 +131,7 @@ export const levels = {
       "  o  oo ",
       " o o oo ",
       "-oo o   ",
-      "  o#   ",
+      "  o#   -",
       "o  o    ",
       "o o  o  ",
       " oo   o-",
@@ -129,15 +139,15 @@ export const levels = {
     ],
     [
       // careful
-      " ##  #",
+      " ##  #-",
       " oo --#",
-      "# #o o",
+      "# #o o-",
       " oo o #",
-      "#ooo o",
+      "#ooo o-",
       "  o o #",
     ],
     [
-      // medium07
+      // middle finger
       " o# -o ",
       "#oo o -",
       "   #ooo",
@@ -146,12 +156,22 @@ export const levels = {
       " ooo -o",
     ],
     [
-      // medium08
+      // maze
       "o#o o",
       "o# oo",
       " #o# ",
       "ooo#o",
       " oo# ",
+    ],
+    [
+      // otherside
+      "- oo o ",
+      " - oo  ",
+      "o -oo o",
+      "ooo-o o",
+      " oo -  ",
+      "oooo -o",
+      "oo o o ",
     ],
   ],
   hard: [
