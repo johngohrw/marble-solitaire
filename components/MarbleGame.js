@@ -57,6 +57,7 @@ export default function MarbleGame({
     setState(levels[level]);
     setPrevStates([]);
     setUndoCredits(initialUndos);
+    setShowOverlay(false); // hide overlay
   }, [level]);
 
   // get valid moves whenever state changes
