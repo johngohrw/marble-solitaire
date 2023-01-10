@@ -327,6 +327,18 @@ export const levels = {
       "oooo oo▚o",
       "   oo    ",
     ],
+    [
+      //loaded charge
+      "  oooo oo",
+      "  oo ooo ",
+      "    o o  ",
+      "#o###o###",
+      "        o",
+      "### ###o#",
+      "oo oo oo ",
+      " ooooo oo",
+      " o o o oo",
+    ],
   ],
 };
 
