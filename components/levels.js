@@ -77,11 +77,11 @@ export const levels = {
     [
       // dota
       "  o oo ",
-      "o# oo# ",
-      " o#oo o",
-      "oo # o ",
-      "    #o ",
-      " #o  # ",
+      "o▚ oo# ",
+      " o▚oo o",
+      "oo ▚ o ",
+      "    ▚o ",
+      " #o  ▚ ",
       "  o    ",
     ],
   ],
