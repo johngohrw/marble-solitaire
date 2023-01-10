@@ -173,6 +173,16 @@ export const levels = {
       "oooo -o",
       "oo o o ",
     ],
+    [
+      // roshan's pit
+      "--   --",
+      "-oo o -",
+      "oo # o ",
+      "oo#o#  ",
+      "oo o o ",
+      "-oooo -",
+      "-- o --",
+    ],
   ],
   hard: [
     [
@@ -300,6 +310,17 @@ export const levels = {
       "oo oo",
       "ooooo",
       "oo oo",
+    ],
+    [
+      // roshan's pit
+      " oo ooo ",
+      " # oo oo",
+      "# ## o o",
+      "# o #ooo",
+      "# oo#oo ",
+      " # o# o ",
+      "  #o ooo",
+      " o o ooo",
     ],
   ],
 };
