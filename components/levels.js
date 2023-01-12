@@ -349,6 +349,17 @@ export const levels = {
       " ooooo oo",
       " o o o oo",
     ],
+    [
+      // let's play checkers
+      "oo o o  ",
+      "  ooo o ",
+      " o o o  ",
+      "o o   o ",
+      " o oo   ",
+      "  o ooo ",
+      " o o o  ",
+      "  o o oo",
+    ],
   ],
 };
 
