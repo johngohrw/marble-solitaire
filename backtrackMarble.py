@@ -3,9 +3,8 @@ import random
 import json
 
 inputPuzzle = [
-    
 ]
-stepsToExtrapolate = 300
+stepsToExtrapolate = 38
 debugMode = True
 
 def getCoordsFromIndex(index, rows, cols):

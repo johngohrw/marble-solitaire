@@ -393,6 +393,19 @@ export const levels = {
       "oo o#- oo",
       "oo oo ooo",
     ],
+    [
+      // evacuation
+      " o ooo o ",
+      "o###o###o",
+      " #o ooo# ",
+      " oooooo o",
+      " #oo oo# ",
+      "oooooooo ",
+      " # o#  # ",
+      "o### ###o",
+      " o ooo o ",
+      "----o----",
+    ],
   ],
 };
 
