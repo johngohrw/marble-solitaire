@@ -360,6 +360,18 @@ export const levels = {
       " o o o  ",
       "  o o oo",
     ],
+    [
+      // bookmark
+      "----o----",
+      "--- o ---",
+      "--oo o --",
+      "- o o oo-",
+      "oo o ooo ",
+      "- ooo ooo",
+      "--oo o o ",
+      "--- ooooo",
+      "----o ooo",
+    ],
   ],
 };
 
