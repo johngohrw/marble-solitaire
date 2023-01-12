@@ -372,6 +372,17 @@ export const levels = {
       "--- ooooo",
       "----o ooo",
     ],
+    [
+      // donkey kong
+      " ---ooo ",
+      "ooooo--o",
+      "o--ooo o",
+      " ooo---o",
+      "o--oo o ",
+      "o oo ---",
+      "---oo o ",
+      " o o -- ",
+    ],
   ],
 };
 
