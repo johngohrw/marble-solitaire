@@ -375,13 +375,23 @@ export const levels = {
     [
       // donkey kong
       " ---ooo ",
-      "ooooo--o",
-      "o--ooo o",
-      " ooo---o",
-      "o--oo o ",
-      "o oo ---",
-      "---oo o ",
+      "ooooo##o",
+      "o##ooo o",
+      " ooo###o",
+      "o##oo o ",
+      "o oo ###",
+      "###oo o ",
       " o o -- ",
+    ],
+    [
+      // cogwheel
+      "oo o ooo ",
+      "oo-o#- oo",
+      "  # o #  ",
+      "oo-o# ooo",
+      "  # o #  ",
+      "oo o#- oo",
+      "oo oo ooo",
     ],
   ],
 };
