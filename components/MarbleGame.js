@@ -152,7 +152,7 @@ export default function MarbleGame({
   }, [level]);
 
   function getUpdatedLevelCompletionProgress(progString, levelID) {
-    const progress = JSON.parse(progString);
+    const progress = JSON.parse(progString) || {};
     progress[levelID] = true;
     return progress;
   }
